@@ -1,0 +1,20 @@
+{
+  "name": "note-writer",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "build": "webpack",
+    "build-watch": "webpack --watch"
+  },
+  "author": "Lukas Dumberger",
+  "license": "MIT",
+  "devDependencies": {
+    "jquery": "^3.4.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
+  },
+  "dependencies": {
+    "webmidi": "^2.5.1",
+    "xml-js": "^1.6.11"
+  }
+}

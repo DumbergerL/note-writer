@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Piano Trainer</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="http://cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link rel="stylesheet" href="http://cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+    <style>
+        body{
+            padding: 40px;
+        }
+        .column{
+            text-align: center
+        }
+
+        .recorder{
+            border: 2px #8c8c8c solid;
+            border-radius: .4rem;
+            padding: 20px;
+        }
+        .recorder > .row{
+            padding: 15px;
+        }
+        .recorder .bank-row button{
+            width: 100%;
+        }
+
+        .button-small {
+            font-size: .8rem;
+            height: 2.8rem;
+            line-height: 2.8rem;
+            padding: 0 1.5rem;
+        }
+
+        .button-large {
+            font-size: 1.4rem;
+            height: 4.5rem;
+            line-height: 4.5rem;
+            padding: 0 2rem;
+        }
+
+        button.muted{
+            background-color: grey;
+            border-color: grey;
+        }
+    </style>
+</head>
+<body>
+    <!--h1>MIDI Piano Trainer</h1>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus facilis officia itaque adipisci vel aliquam nobis eum omnis, explicabo sit culpa, ipsam nesciunt veritatis ad natus aperiam! Placeat, quia sit.</p>
+    <button id="startSynthi">START SYNTHI!</button-->
+
+    <div class="container recorder">
+        <div class="row">
+            <div class="column" id="selectedDevice">...</div>
+            <div class="column" id="selectedChanel">...</div>
+        </div>
+        <div class="row" style="justify-content: center;">
+            <div class="column">
+                <button class="button-large" id="clearRecord">CLEAR RECORD</button>
+            </div>
+            <div class="column">
+                <button class="button-large" id="playRecord">PLAY RECORD</button>
+            </div>
+        </div>
+        <div class="row bank-row">
+            <div class="column">
+                <button class="button-outline">Bank1</button>
+            </div>
+            <div class="column">
+                <button class="button-outline">Bank2</button>
+            </div>
+            <div class="column">
+                <button class="button-outline">Bank3</button>
+            </div>
+            <div class="column">
+                <button class="button-outline">Bank4</button>
+            </div>
+            <div class="column">
+                <button class="button-outline">Bank5</button>
+            </div>
+            <div class="column">
+                <button class="button-outline">Bank6</button>
+            </div>       
+        </div>
+        
+    </div>
+
+
+</body>
+<script src='dist/note-writer.js'></script>
+</html>
