@@ -14,6 +14,7 @@
     "webpack-cli": "^3.3.9"
   },
   "dependencies": {
+    "opensheetmusicdisplay": "^0.7.1",
     "webmidi": "^2.5.1",
     "xml-js": "^1.6.11"
   }

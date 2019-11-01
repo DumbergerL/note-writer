@@ -8,9 +8,12 @@ class Composition extends MusicXMLParser{
     constructor(){
         super();
         this._partList = [];
+        this._title = "Default";
     }
 
     addPart(part){ this._partList.push(part); return this;}
+    setTitle(title){ this._title = title; return this; }
+
 
     toMusicXMLinJSON(){
         const JSON = {
@@ -26,9 +29,12 @@ class Composition extends MusicXMLParser{
                 'part-list': {
                     'score-part': []
                 },
+
                 'part': []
             }
         };
+
+        if(this._title !== null)JSON['score-partwise']['work'] = {'work-title': {'_text': this._title}};
 
         this._partList.forEach( part => {
             JSON['score-partwise']['part-list']['score-part'].push( part.toMusicXMLPartListinJSON()['score-part'] );

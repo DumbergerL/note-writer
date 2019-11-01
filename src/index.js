@@ -1,5 +1,6 @@
 const MIDIController = require('./MIDI/MIDIController');
 const MIDIRecorder = require('./MIDI/MIDIRecorder');
+const OSMD = require('./OSMD/index');
 const Note = require('./Utils/Note');
 const {Composition, Part, Measure} = require('./MusicXML/Composition');
 
@@ -11,9 +12,11 @@ var Measure1 = new Measure(1);
 var Measure2 = new Measure(2);
 
 Measure1
-    .addNote( (new Note()).setDuration(24).setStep("C").setOctave(4) )
-    .addNote( (new Note()).setDuration(24).setStep("D").setOctave(4) )
+    .addNote( (new Note()).setDuration(12).setStep("C").setOctave(4) )
+    .addNote( (new Note()).setDuration(12).setStep("D").setOctave(4) )
     .addNote( (new Note()).setDuration(24).setStep("E").setOctave(4) )
+    .addNote( (new Note()).setDuration(12).setStep("G").setOctave(4) )
+    .addNote( (new Note()).setDuration(12).setStep("E").setOctave(4) )
     .addNote( (new Note()).setDuration(24).setStep("F").setOctave(4) );
 Measure2
     .addNote( (new Note()).setDuration(24).setStep("G").setOctave(4) )
@@ -23,7 +26,7 @@ Measure2
     .addNote( (new Note()).setDuration(24).setStep("B#").setOctave(4) )
     .addNote( (new Note()).setDuration(24).setStep("C").setOctave(5) );
 
-var Part1 = new Part("P1");
+var Part1 = new Part("Piano von Lukas");
 Part1
     .addMeasure( Measure1 )
     .addMeasure( Measure2 );
@@ -31,9 +34,19 @@ Part1
 var theMusic = new Composition();
 theMusic.addPart(Part1);    
 
-console.log( theMusic.toMusicXML() );
+OSMD.renderMusicXML( theMusic.toMusicXML() );
 
-theMusic.download();
+setTimeout(() => {
+    theMusic.setTitle("Any Title of the World!");
+    OSMD.renderMusicXML( theMusic.toMusicXML() );
+}, 2000);
+
+//console.log( theMusic.toMusicXML() );
+
+//theMusic.download();
+
+
+
 /*
 var DigitalPiano = new MIDIController();
 var Recorder = new MIDIRecorder();
