@@ -1,7 +1,8 @@
-const xmlConverter = require('xml-js');
+const MusicXMLParser = require('../MusicXML/MusicXMLParser');
 
-class Note{
+class Note extends MusicXMLParser{
     constructor(){
+        super();
         this._step = null;
         this._octave = null;
         this._alter = null;
@@ -16,11 +17,19 @@ class Note{
     get octave(){ return this._octave; }
     get alter(){ return this._alter; }
     get duration(){ return this._duration; }
+    get type(){
+        let theDurationType = Note.TYPES.filter( durationType => {
+            return durationType.duration === this.duration;
+        })[0];
+        return theDurationType ? theDurationType.type : null;
+    }
     
     get durationTimestamp(){ return (this.timestampEnd - this.timestampStart); }
     get timestampStart(){ return (this._timestampStart); }
     get timestampEnd(){ return (this._timestampEnd); }
     get velocity(){ return this._velocity; }
+
+    get isRest(){ return (this.step === null || this.octave === null); }
 
     setStep(step){
         if(step.includes('#')){
@@ -61,23 +70,33 @@ class Note{
         return ""+this.note+this.octave;
     }
 
-    toMusicXML(){
-        if(this.step === null || this.octave === null || this.duration === null)throw "Step, Octave and Duration is not set. Cant construct MusicXML Note.";
-        const toneJSON = {
-            note: {
-                pitch: {
-                    step: { _text: this.step },
-                    octave: { _text: this.octave}
-                },
-                duration: { _text: this.duration, }
-            }
+    toMusicXMLinJSON(){
+        if(this.duration === null)throw "Duration is not set. Cant construct MusicXML Note.";
+        const toneJSON = {}
+        if(this.isRest){
+            toneJSON.note = {
+                    rest: { }
+                };
+        }else{
+            toneJSON.note = {
+                    pitch: {
+                        step: { _text: this.step },
+                        octave: { _text: this.octave}
+                    },
+                };
         }
 
+        toneJSON.note.duration = { _text: this.duration };
+              
         if(this.alter !== null){
             toneJSON.note.pitch['alter'] = { _text: this.alter };
         }
 
-        return xmlConverter.js2xml( toneJSON, { compact: true, ignoreComment: true, spaces: 4} );
+        if(this.type !== null){
+            toneJSON.note.type = { _text: this.type };
+        }
+
+        return toneJSON;
     }
 
     toJSON(){
@@ -100,5 +119,12 @@ class Note{
 }
 
 Note.VALID_STEPS = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+Note.TYPES = [ 
+    { duration: 96, type: 'whole'},
+    { duration: 48, type: 'half'},
+    { duration: 24, type: 'quarter'},
+    { duration: 12, type: 'eighth'},
+    { duration: 6, type: 'sixteenth'},
+];
 
 module.exports = Note;
