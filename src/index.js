@@ -47,7 +47,7 @@ setTimeout(() => {
 
 
 
-/*
+
 var DigitalPiano = new MIDIController();
 var Recorder = new MIDIRecorder();
 
@@ -57,11 +57,12 @@ DigitalPiano.initController().then( () => {
     Recorder.registerOutput( DigitalPiano.output );
 
     DigitalPiano.onNoteOn( (event) => {
+        console.log(event);
         switch (event.note.number) {
-            case 21:
+            case 36:
                 Recorder.playRecord();
                 break;
-            case 23:
+            case 38:
                 Recorder.clearRecord();
                 break;
             default:

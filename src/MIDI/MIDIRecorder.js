@@ -4,35 +4,44 @@ class MIDIRecorder{
 
 
     constructor(){
-        this.DEBUG = true;
-        this.output = null;
+        this._DEBUG = true;
+        this._output = null;
 
-        this.recordedNotes = [];
-        this.recordedPedalEvents = [];
+        this._recordedNotes = [];
+        this._recordedPedalEvents = [];
     }
 
+    get recordedNotes(){ return this._recordedNotes; }
+
     registerOutput(output){
-        this.output = output;
+        this._output = output;
     }
 
     noteOnEvent( event ){
-        var note = new Note(event.note.name, event.note.octave, event.timestamp);
-        note.velocity = event.velocity;
-        this.recordedNotes.push(
+        var note = (new Note())
+            .setStep( event.note.name )
+            .setOctave( event.note.octave)
+            .setTimestampStart( event.timestamp)
+            .setVelocity( event.velocity );
+
+        this._recordedNotes.push(
             note
         );
     }
 
     noteOffEvent( event ){
-        var offNote = new Note(event.note.name, event.note.octave, event.timestamp);
-
-        var notEndedNotes = this.recordedNotes.filter( (note) => {
+        var offNote = new Note()
+            .setStep( event.note.name )
+            .setOctave( event.note.octave)
+            .setTimestampStart( event.note.octave)
+        
+        var notEndedNotes = this._recordedNotes.filter( (note) => {
             return !note.hasEnded();
         });
 
         for(var i = 0; i < notEndedNotes.length; i++){
             if( Note.equals(offNote, notEndedNotes[i]) ){
-                notEndedNotes[i].setOffNoteTimestamp( event.timestamp );
+                notEndedNotes[i].setTimestampEnd( event.timestamp );
                 break;
             }
         }
@@ -44,14 +53,17 @@ class MIDIRecorder{
     }
 
     clearRecord(){
-        this.recordedNotes = [];
+        this._recordedNotes = [];
     }
 
     _setNotesToT0(){
-        var minTimestamp = this.recordedNotes[0].timestamp;
+        var minTimestamp = this._recordedNotes[0].timestampStart;
 
-        this.recordedNotes.forEach( (note) => {
-            note.timestamp = (note.timestamp - minTimestamp);
+        this._recordedNotes.forEach( (note) => {
+            note
+            .setTimestampStart( (note.timestampStart - minTimestamp) )
+            .setTimestampEnd( (note.timestampEnd - minTimestamp) );
+            
         });
 
 
@@ -61,18 +73,19 @@ class MIDIRecorder{
     }
 
     _playNote(note){
-        if(!this.output)throw "No Output is registered!";
-        this.output.playNote( [ note.toString() ], 1, {duration: note.duration, velocity: note.velocity, release: 0}); // note.duration
+        if(!this._output)throw "No Output is registered!";
+        this._output.playNote( [ (note.step + note.octave) ], 1, {duration: note.durationTimestamp, velocity: note.velocity, release: 0}); // note.duration
     }
 
     playRecord(){
-        if(this.recordedNotes.length <= 0)return;
+        if(this._recordedNotes.length <= 0)return;
+    
 
         this._setNotesToT0();
 
         /*this.recordedPedalEvents.forEach( (event) => {
             setTimeout(() => {
-                this.output.sendControlChange( event.controller.name, event.value);
+                this._output.sendControlChange( event.controller.name, event.value);
             }, event.timeout);
         })*/
 
@@ -81,16 +94,16 @@ class MIDIRecorder{
         var clockInterval = setInterval(() => {
             tick++;
         
-            if(this.recordedNotes.length <= 1)clearInterval(clockInterval);
+            if(this._recordedNotes.length <= 1)clearInterval(clockInterval);
         
             try{
-                var note = this.recordedNotes[0];
+                var note = this._recordedNotes[0];
                 
-                var timeout = (note.timestamp - (tick * interval));
+                var timeout = (note.timestampStart - (tick * interval));
 
                 setTimeout( () =>{ this._playNote(note);}, timeout);
 
-                this.recordedNotes.splice(0,1);
+                this._recordedNotes.splice(0,1);
             }catch(e){
                 console.log("ERROR IN NEXT LINE", e);
                 clearInterval(this.clockInterval);

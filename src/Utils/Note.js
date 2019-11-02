@@ -28,6 +28,7 @@ class Note extends MusicXMLParser{
     get timestampStart(){ return (this._timestampStart); }
     get timestampEnd(){ return (this._timestampEnd); }
     get velocity(){ return this._velocity; }
+    hasEnded(){ return this._timestampEnd !== null;}
 
     get isRest(){ return (this.step === null || this.octave === null); }
 
