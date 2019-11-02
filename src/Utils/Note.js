@@ -24,7 +24,7 @@ class Note extends MusicXMLParser{
         return theDurationType ? theDurationType.type : null;
     }
     
-    get durationTimestamp(){ return (this.timestampEnd - this.timestampStart); }
+    get durationTimestamp(){ return parseInt(this.timestampEnd - this.timestampStart); }
     get timestampStart(){ return (this._timestampStart); }
     get timestampEnd(){ return (this._timestampEnd); }
     get velocity(){ return this._velocity; }
@@ -125,7 +125,8 @@ Note.TYPES = [
     { duration: 48, type: 'half'},
     { duration: 24, type: 'quarter'},
     { duration: 12, type: 'eighth'},
-    { duration: 6, type: 'sixteenth'},
+    { duration: 6, type: '16th'},
+    { duration: 3, type: '32nd'},    
 ];
 
 module.exports = Note;

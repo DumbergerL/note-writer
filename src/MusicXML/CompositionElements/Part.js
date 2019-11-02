@@ -17,8 +17,8 @@ class Part extends MusicXMLParser{
     addMeasure(measure){ this._measures.push(measure); return this; }
     addNote(note){
         var latestMeasure = this._measures[this._measures.length - 1];
-        if(latestMeasure.measureDuration >= 96){
-            this.addMeasure( new Measure( this._measures.length ));    
+        if(latestMeasure === undefined || latestMeasure.measureDuration >= 96){
+            this.addMeasure( new Measure( this._measures.length+1 ));    
             latestMeasure = this._measures[this._measures.length - 1];
         }
 

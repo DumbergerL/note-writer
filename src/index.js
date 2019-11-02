@@ -2,6 +2,7 @@ const MIDIController = require('./MIDI/MIDIController');
 const MIDIRecorder = require('./MIDI/MIDIRecorder');
 const OSMD = require('./OSMD/index');
 const Note = require('./Utils/Note');
+const BPM = require('./Utils/BPM');
 const {Composition, Part, Measure} = require('./MusicXML/Composition');
 
 window.Note = Note;
@@ -12,7 +13,7 @@ var Measure1 = new Measure(1);
 var Measure2 = new Measure(2);
 var Measure3 = new Measure(3);
 
-Measure1
+/*Measure1
     .addNote( (new Note()).setDuration(12).setStep("C").setOctave(4) )
     .addNote( (new Note()).setDuration(12).setStep("D").setOctave(4) )
     .addNote( (new Note()).setDuration(24).setStep("E").setOctave(4) )
@@ -25,29 +26,18 @@ Measure2
     .addNote( (new Note()).setDuration(24).setStep("Bb").setOctave(4) )
     .addNote( (new Note()).setDuration(24).setStep("B").setOctave(4) )
     .addNote( (new Note()).setDuration(24).setStep("B#").setOctave(4) )
-    .addNote( (new Note()).setDuration(24).setStep("C").setOctave(5) );
+    .addNote( (new Note()).setDuration(24).setStep("C").setOctave(5) );*/
 
 var Part1 = new Part("Piano von Lukas");
-Part1
-    .addMeasure( Measure1 )
-    .addMeasure( Measure2 )
-    .addMeasure( Measure3 );
+/*Part1
+    .addMeasure( Measure1 );
+   // .addMeasure( Measure2 )
+    //.addMeasure( Measure3 );/**/
 
 var theMusic = new Composition();
 theMusic.addPart(Part1);    
 
 OSMD.renderMusicXML( theMusic.toMusicXML() );
-
-setTimeout(() => {
-    theMusic.setTitle("Any Title of the World!");
-    OSMD.renderMusicXML( theMusic.toMusicXML() );
-}, 2000);
-
-//console.log( theMusic.toMusicXML() );
-
-//theMusic.download();
-
-
 
 
 var DigitalPiano = new MIDIController();
@@ -58,9 +48,11 @@ DigitalPiano.initController().then( () => {
 
     Recorder.registerOutput( DigitalPiano.output );
     Recorder.registerNoteEndedEvent( note => {
-        console.log("EVENT-BUS-DUMP", note);
+        console.log("EVENT-BUS-DUMP");
 
-        Part1.addNote( note.setDuration(12));
+        BPM.CLASSIFY_80_90( note );
+
+        Part1.addNote( note );
         OSMD.renderMusicXML( theMusic.toMusicXML() );
     });
 
@@ -69,12 +61,11 @@ DigitalPiano.initController().then( () => {
         console.log(event);
         switch (event.note.number) {
             case 36:
+                console.log("FINAL DUMP!!!");
                 Recorder.recordedNotes.forEach( note => {
-                    Measure3.addNote( note.setDuration(24) );
+                    console.log(note.durationTimestamp);
                 });
-                OSMD.renderMusicXML( theMusic.toMusicXML() );
-
-
+                theMusic.download();
                 Recorder.playRecord();
                 break;
             case 38:
