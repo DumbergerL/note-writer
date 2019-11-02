@@ -9,12 +9,17 @@ class MIDIRecorder{
 
         this._recordedNotes = [];
         this._recordedPedalEvents = [];
+        this._noteEndedEvents = [];
     }
 
     get recordedNotes(){ return this._recordedNotes; }
 
     registerOutput(output){
         this._output = output;
+    }
+
+    registerNoteEndedEvent( callback ){
+        this._noteEndedEvents.push( callback );
     }
 
     noteOnEvent( event ){
@@ -45,6 +50,13 @@ class MIDIRecorder{
                 break;
             }
         }
+
+        var endedNotes = this._recordedNotes.filter( (note) => {
+            return note.hasEnded();
+        });
+        var latestEndedNote = endedNotes[endedNotes.length-1];
+
+        this._noteEndedEvents.forEach( callback => { callback(latestEndedNote);});
     }
 
     pedalEvent(event){

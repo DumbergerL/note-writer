@@ -1,4 +1,5 @@
 const MusicXMLParser = require('../MusicXMLParser');
+const Measure = require('../CompositionElements/Measure');
 
 class Part extends MusicXMLParser{
     constructor(partID){
@@ -9,11 +10,21 @@ class Part extends MusicXMLParser{
         this._measures = [];
     }
 
-    setName(name){ this._name = name; return this; }
-    addMeasure(measure){ this._measures.push(measure); return this; }
-
     get name(){ return this._name; }
     get id(){ return this._id; }
+
+    setName(name){ this._name = name; return this; }
+    addMeasure(measure){ this._measures.push(measure); return this; }
+    addNote(note){
+        var latestMeasure = this._measures[this._measures.length - 1];
+        if(latestMeasure.measureDuration >= 96){
+            this.addMeasure( new Measure( this._measures.length ));    
+            latestMeasure = this._measures[this._measures.length - 1];
+        }
+
+        latestMeasure.addNote( note );
+        return this;
+    }
 
     toMusicXMLPartListinJSON(){
         const partJSON = { 

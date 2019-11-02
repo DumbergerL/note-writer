@@ -10,6 +10,7 @@ window.Part = Part;
 
 var Measure1 = new Measure(1);
 var Measure2 = new Measure(2);
+var Measure3 = new Measure(3);
 
 Measure1
     .addNote( (new Note()).setDuration(12).setStep("C").setOctave(4) )
@@ -29,7 +30,8 @@ Measure2
 var Part1 = new Part("Piano von Lukas");
 Part1
     .addMeasure( Measure1 )
-    .addMeasure( Measure2 );
+    .addMeasure( Measure2 )
+    .addMeasure( Measure3 );
 
 var theMusic = new Composition();
 theMusic.addPart(Part1);    
@@ -55,11 +57,24 @@ var Recorder = new MIDIRecorder();
 DigitalPiano.initController().then( () => {
 
     Recorder.registerOutput( DigitalPiano.output );
+    Recorder.registerNoteEndedEvent( note => {
+        console.log("EVENT-BUS-DUMP", note);
+
+        Part1.addNote( note.setDuration(12));
+        OSMD.renderMusicXML( theMusic.toMusicXML() );
+    });
+
 
     DigitalPiano.onNoteOn( (event) => {
         console.log(event);
         switch (event.note.number) {
             case 36:
+                Recorder.recordedNotes.forEach( note => {
+                    Measure3.addNote( note.setDuration(24) );
+                });
+                OSMD.renderMusicXML( theMusic.toMusicXML() );
+
+
                 Recorder.playRecord();
                 break;
             case 38:
