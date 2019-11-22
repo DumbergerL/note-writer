@@ -1,5 +1,6 @@
 const MusicXMLParser = require('../MusicXMLParser');
 const Measure = require('../CompositionElements/Measure');
+const Note = require('../../Utils/Note');
 
 class Part extends MusicXMLParser{
     constructor(partID){
@@ -14,8 +15,13 @@ class Part extends MusicXMLParser{
     get id(){ return this._id; }
 
     setName(name){ this._name = name; return this; }
-    addMeasure(measure){ this._measures.push(measure); return this; }
+    addMeasure(measure){ 
+        if(!(measure instanceof Measure))throw "Parameter must be instance of Measure";
+        this._measures.push(measure); 
+        return this; 
+    }
     addNote(note){
+        if(!(note instanceof Note))throw "Parameter must be instance of Note!";
         var latestMeasure = this._measures[this._measures.length - 1];
         if(latestMeasure === undefined || latestMeasure.measureDuration >= 96){
             this.addMeasure( new Measure( this._measures.length+1 ));    

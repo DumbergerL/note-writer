@@ -11,8 +11,15 @@ class Composition extends MusicXMLParser{
         this._title = "Default";
     }
 
-    addPart(part){ this._partList.push(part); return this;}
-    setTitle(title){ this._title = title; return this; }
+    addPart(part){ 
+        if(!(part instanceof Part))throw "Parameter must be instance of Part";
+        this._partList.push(part); 
+        return this;
+    }
+    setTitle(title){ 
+        this._title = title; 
+        return this; 
+    }
 
 
     toMusicXMLinJSON(){
