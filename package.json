@@ -5,11 +5,13 @@
   "scripts": {
     "build": "webpack",
     "build-watch": "webpack --watch",
-    "dev-start": "webpack-dev-server --open"
+    "dev-start": "webpack-dev-server --open",
+    "test": "jest"
   },
   "author": "Lukas Dumberger",
   "license": "MIT",
   "devDependencies": {
+    "jest": "^24.9.0",
     "jquery": "^3.4.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
