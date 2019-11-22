@@ -13,6 +13,7 @@ class NoteDump{
     }
 
     downloadDump(){
+        console.log("DOWNLOAD THE DUMP!");
         let json = [];
 
         this._dump.forEach( note => {
