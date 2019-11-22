@@ -123,3 +123,19 @@ test('Note equality', () => {
     note2.setAlter(-1);
     expect( Note.equals(note1, note2) ).toEqual( false );
 });
+
+test('Note toJSON method', () => {
+    let note = new Note();
+    var jsonFormat = note.toJSON();
+
+    expect( jsonFormat.hasOwnProperty('step')).toEqual(true);
+    expect( jsonFormat.hasOwnProperty('octave')).toEqual(true);
+    expect( jsonFormat.hasOwnProperty('alter')).toEqual(true);
+    expect( jsonFormat.hasOwnProperty('type')).toEqual(true);
+    expect( jsonFormat.hasOwnProperty('duration')).toEqual(true);
+    expect( jsonFormat.hasOwnProperty('durationTimestamp')).toEqual(true);
+    expect( jsonFormat.hasOwnProperty('timestampEnd')).toEqual(true);
+    expect( jsonFormat.hasOwnProperty('timestampStart')).toEqual(true);
+    expect( jsonFormat.hasOwnProperty('velocity')).toEqual(true);
+    expect( jsonFormat.hasOwnProperty('isRest')).toEqual(true);
+});

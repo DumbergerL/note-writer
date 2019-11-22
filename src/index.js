@@ -6,6 +6,7 @@ const BPM = require('./Utils/BPM');
 const NoteStream = require('./Utils/NoteStream');
 const NoteProcessor = require('./Processing/NoteProcessor');
 const {Composition, Part, Measure} = require('./MusicXML/Composition');
+const NoteDump = require('./Processing/NoteDump');
 
 //window.Note = Note;
 //window.Composition = Composition;
@@ -48,10 +49,14 @@ theStream.registerCallback( note => {theProcessor.pushNote(note); });
 
 theStream.registerCallback( note => {
     note.setDuration( BPM.GET_DURATION_C80140( note ));
-
     Part1.addNote( note );
-
     OSMD.renderMusicXML( theMusic.toMusicXML() );
+});
+
+var noteDump = new NoteDump();
+theStream.registerCallback( note => {
+    noteDump.addNote( note );
+    if(note.step === 'C' && note.octave === 1)noteDump.downloadDump();
 });
 
 /*

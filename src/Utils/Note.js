@@ -105,12 +105,18 @@ class Note extends MusicXMLParser{
         const jsonObj = {};
 
         //add all private (_note) attributes to json
-        const attributes = Object.getOwnPropertyNames(x);
+        const attributes = Object.getOwnPropertyNames(this);
         attributes.forEach( key => {
             if(key.charAt(0) === '_'){
                 jsonObj[key.substring(1, key.length)] = this[key];
             }
         });
+
+
+        jsonObj['durationTimestamp'] = this.durationTimestamp;
+        jsonObj['isRest'] = this.isRest;
+        jsonObj['type'] = this.type;
+        jsonObj['velocity'] = this.velocity;
 
         return jsonObj;
     }

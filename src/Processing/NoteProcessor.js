@@ -1,4 +1,4 @@
-const BPM = require('./BPM');
+const BPM = require('../Utils/BPM');
 const OSMD = require('../OSMD/index');
 const {Composition, Part, Measure} = require('../MusicXML/Composition');
 
