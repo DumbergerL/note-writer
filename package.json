@@ -4,14 +4,16 @@
   "description": "",
   "scripts": {
     "build": "webpack",
-    "build-watch": "webpack --watch"
+    "build-watch": "webpack --watch",
+    "dev-start": "webpack-dev-server --open"
   },
   "author": "Lukas Dumberger",
   "license": "MIT",
   "devDependencies": {
     "jquery": "^3.4.1",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
     "opensheetmusicdisplay": "^0.7.1",

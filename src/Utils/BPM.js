@@ -35,16 +35,17 @@ class BPM{
         ];
     }
 
-    CLASSIFY_80_90( note ){
-        note.setDuration( 6 );
 
-        console.log( note.durationTimestamp);
-        
+    GET_DURATION_C80140( startTS, endTS ){
+        const duration = endTS - startTS;
+
         this.CLASSIFICATION_80_140.forEach( bpmClass => {
-            if(note.durationTimestamp < bpmClass.upperBound && note.durationTimestamp > bpmClass.lowerBound){
-                note.setDuration( bpmClass.duration );
+            if(duration < bpmClass.upperBound && duration > bpmClass.lowerBound){
+                return ( bpmClass.duration );
             }
         });
+
+        return null;
     }
 }
 

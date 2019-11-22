@@ -6,5 +6,9 @@ module.exports = {
       path: path.resolve(__dirname, 'dist'),
       filename: 'note-writer.js'
     },
-    mode: 'development'
+    mode: 'development',
+    devtool: 'inline-source-map',
+    devServer: {
+      contentBase: './',
+    },
 };

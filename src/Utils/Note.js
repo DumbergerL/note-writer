@@ -115,7 +115,7 @@ class Note extends MusicXMLParser{
     }
 
     static equals(n1, n2){
-        return (n1.note === n2.note) && (n1.octave === n2.octave);
+        return (n1.step === n2.step) && (n1.octave === n2.octave) && (n1.alter === n2.alter);
     }
 }
 
