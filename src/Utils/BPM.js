@@ -45,7 +45,7 @@ class BPM{
             }
         });
 
-        return null;
+        return 12;
     }
 }
 
