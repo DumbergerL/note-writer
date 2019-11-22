@@ -4,7 +4,7 @@ const OSMD = require('./OSMD/index');
 const Note = require('./Utils/Note');
 const BPM = require('./Utils/BPM');
 const NoteStream = require('./Utils/NoteStream');
-const NoteProcessor = require('./Utils/NoteProcessor');
+const NoteProcessor = require('./Processing/NoteProcessor');
 const {Composition, Part, Measure} = require('./MusicXML/Composition');
 
 //window.Note = Note;
