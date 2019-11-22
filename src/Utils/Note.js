@@ -33,6 +33,7 @@ class Note extends MusicXMLParser{
     get isRest(){ return (this.step === null || this.octave === null); }
 
     setStep(step){
+        if(typeof step !== 'string')throw "Invalid step ("+step+") given in! Must be String!";
         if(step.includes('#')){
             step = step.replace('#', '');
             this.setAlter(1);
@@ -68,7 +69,7 @@ class Note extends MusicXMLParser{
     
 
     toString(){
-        return ""+this.note+this.octave;
+        return ""+this.step+this.octave;
     }
 
     toMusicXMLinJSON(){

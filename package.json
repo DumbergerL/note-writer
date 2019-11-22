@@ -6,7 +6,9 @@
     "build": "webpack",
     "build-watch": "webpack --watch",
     "dev-start": "webpack-dev-server --open",
-    "test": "jest"
+    "test": "jest",
+    "test-coverage": "jest --coverage"
+    
   },
   "author": "Lukas Dumberger",
   "license": "MIT",
