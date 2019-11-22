@@ -1,9 +1,10 @@
 const Note = require('./Note');
+const MidiController = require('../MIDI/MIDIController');
 
 class NoteStream{
 
     constructor(midiController){
-
+        if(!(midiController instanceof MidiController))throw "Parameter must be a instance of MidiController!";
         this._midiController = midiController;
 
         this._midiController.initController().then( () => {
@@ -22,6 +23,7 @@ class NoteStream{
     }
 
     registerCallback( callback ){
+        if(typeof callback !== "function")throw "Parameter must be function!";
         this._callbacks.push(callback);
     }
 
