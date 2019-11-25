@@ -1,4 +1,5 @@
 const Note = require('../Utils/Note');
+const KMeans = require('./Clustering/k-means');
 
 class NoteDump{
 
@@ -16,8 +17,16 @@ class NoteDump{
         console.log("DOWNLOAD THE DUMP!");
         let json = [];
 
-        this._dump.forEach( note => {
-            json.push( note.toJSON());
+        let kMeans = new KMeans(3);
+        kMeans.setDataset( this._dump ).generateCluster(100);
+
+
+        this._dump.forEach( (note, index) => {
+            if(index === this._dump.length - 1)return;  //ignore last Element
+            let noteJSON = note.toJSON();
+            noteJSON.cluster = kMeans.getClusterIdOfRecord(note);
+            json.push( noteJSON );
+
         });
 
         var dataStr = "data:json;charset=utf-8," + encodeURIComponent( JSON.stringify( json ) );
