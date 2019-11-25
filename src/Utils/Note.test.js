@@ -139,3 +139,23 @@ test('Note toJSON method', () => {
     expect( jsonFormat.hasOwnProperty('velocity')).toEqual(true);
     expect( jsonFormat.hasOwnProperty('isRest')).toEqual(true);
 });
+
+test('Note validator and cloning', () => {
+    let note = new Note().setOctave(4).setStep('C').setAlter(-1);
+    let apple = {};
+
+    let cloneSpread = {...note};
+    let cloneAssign = Object.assign({}, note);
+    let cloneJSON = JSON.parse(JSON.stringify(note));
+    let cloneMethod = Note.clone( note );
+
+
+    expect( Note.validate(note) ).toEqual( true );
+    expect( Note.validate(cloneMethod) ).toEqual( true );
+    expect( Note.equals(cloneMethod, note) ).toEqual( true );
+    
+    expect(() => { Note.validate(apple) }).toThrow();
+    expect(() => { Note.validate(cloneSpread) }).toThrow();
+    expect(() => { Note.validate(cloneAssign) }).toThrow();
+    expect(() => { Note.validate(cloneJSON) }).toThrow();
+});

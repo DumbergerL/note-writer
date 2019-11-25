@@ -124,6 +124,20 @@ class Note extends MusicXMLParser{
     static equals(n1, n2){
         return (n1.step === n2.step) && (n1.octave === n2.octave) && (n1.alter === n2.alter);
     }
+
+    static validate( note ){
+        if(!(note instanceof Note))throw "Parameter given in must be type of Note!";
+        return true;
+    }
+
+    static clone( note ){
+        if (null == note || "object" != typeof note) return note;
+        var copy = new Note();
+        for (var attr in note) {
+            if (note.hasOwnProperty(attr)) copy[attr] = note[attr];
+        }
+        return copy;
+    }
 }
 
 Note.VALID_STEPS = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
