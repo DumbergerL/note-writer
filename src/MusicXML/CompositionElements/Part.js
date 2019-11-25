@@ -21,7 +21,7 @@ class Part extends MusicXMLParser{
         return this; 
     }
     addNote(note){
-        if(!(note instanceof Note))throw "Parameter must be instance of Note!";
+        Note.validate(note);
         var latestMeasure = this._measures[this._measures.length - 1];
         if(latestMeasure === undefined || latestMeasure.measureDuration >= 96){
             this.addMeasure( new Measure( this._measures.length+1 ));    

@@ -51,7 +51,7 @@ class kMeans{
 
             this._cluster.forEach( cluster => { //Aktualisierung
                 console.log( cluster.id  + " - " + cluster.centroid + " ("+ cluster.elements.length +")");
-                cluster.calcCentroids();
+                cluster.calcCentroid();
                 cluster.dumpElements();
             });
         }

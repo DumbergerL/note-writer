@@ -8,7 +8,7 @@ class NoteDump{
     }
 
     addNote( note ){
-        if(!(note instanceof Note))throw "Paremeter must be instance of Note!";
+        Note.validate(note);
         this._dump.push(note);
         return this;
     }

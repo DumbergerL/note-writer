@@ -4,14 +4,14 @@ class Cluster{
     
     constructor(){
         this._elements = [];
-        this._centroid = 0;
-        this._maxDistance = 0;
+        this._centroid = null;
+        this._maxDistance = null;
 
         this._id = Cluster.GET_CLUSTER_ID();
     }
 
     addElement( note ){
-        if(!(note instanceof Note))throw "Parameter must be from type Note";
+        Note.validate(note);
         this._elements.push(note);
         return this;
     }
@@ -22,11 +22,12 @@ class Cluster{
     }
 
     setCentroidValue(timestampSumm){
+        if(timestampSumm === undefined || Number(timestampSumm) !== timestampSumm)throw "Parameter must be Number!";
         this._centroid = timestampSumm;
         return this;
     }
 
-    calcCentroids(){    //WAS WENN KEINE ELEMENTE ZUGEORDNET WERDEN!?
+    calcCentroid(){    //WAS WENN KEINE ELEMENTE ZUGEORDNET WERDEN!?
         let centroidSumm = 0;
         this._elements.forEach( note => {
             centroidSumm += note.durationTimestamp
@@ -36,18 +37,19 @@ class Cluster{
     }
     
     calcMaxDistance(){
-        let maxDistance = 0;
+        this._maxDistance = 0;
         this._elements.forEach( note => {
-            if( this.getDistance(note) > maxDistance){
-                maxDistance = this.getDistance();
+            let calcDistance = this.getDistance( note );
+            if( calcDistance > this._maxDistance){
+                this._maxDistance = calcDistance;
             }
         });
-        return maxDistance;
+        return this;
     }
 
     getDistance( note ){
-        if(!(note instanceof Note))throw "Parameter must be from type Note";
-        return Math.abs( this.centroid - note.durationTimestamp );
+        Note.validate(note);
+        return Math.abs( this._centroid - note.durationTimestamp );
     }
 
 
@@ -56,10 +58,12 @@ class Cluster{
     }
 
     get centroid(){
+        if(this._centroid === null)throw "Centroid undefined! Please exec calc Centroid!";
         return this._centroid;
     }
 
     get maxDistance(){
+        if(this._maxDistance === null)throw "Max Distance undefined! Please exec calc Centroid!";
         return this._maxDistance;
     }
 
