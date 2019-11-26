@@ -14,25 +14,19 @@ class DBSCAN extends ClusterAlgorithm{
             return (a.durationTimestamp - b.durationTimestamp);
         });
 
-        console.log("DUMP THE DATASET", this._dataset);
-
         this._cluster.push(
             new Cluster().addElement( this._dataset[0] )
         );
         
         this._dataset.forEach( (note,index) => {   //assumption: cluster1 have already been clustered, cluster2 have no cluster
             if(index <= 0)return;
-            console.log("FOREACH", index, note);
             
             let currentCluster = this._cluster[ this._cluster.length - 1 ];
-
             let maxDuration = currentCluster.maxElement.durationTimestamp;
 
             if( note.durationTimestamp < (maxDuration + this._e)){
-                console.log("--> Add to same cluster!");
                 currentCluster.addElement( note );
             }else{
-                console.log("--> Create new Cluster!");
                 this._cluster.push(
                     new Cluster().addElement( note )
                 );

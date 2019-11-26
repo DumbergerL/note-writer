@@ -43,10 +43,18 @@ theMusic.addPart(Part1);
 OSMD.renderMusicXML( theMusic.toMusicXML() );
 
 var theStream = new NoteStream( new MIDIController());
+
 var theProcessor = new NoteProcessor();
-theStream.registerCallback( note => {theProcessor.pushNote(note); });
 
+theStream.registerCallback( note => {
+    if(note.step === 'C' && note.octave === 1){
+        theProcessor.processNoteDuration();
+    }else{
+        theProcessor.pushNote(note); 
+    }
+});
 
+/*
 theStream.registerCallback( note => {
     note.setDuration( BPM.GET_DURATION_C80140( note ));
     Part1.addNote( note );
@@ -57,7 +65,7 @@ var noteDump = new NoteDump();
 theStream.registerCallback( note => {
     noteDump.addNote( note );
     if(note.step === 'C' && note.octave === 1)noteDump.downloadDump();
-});
+});*/
 
 /*
 var DigitalPiano = new MIDIController();
