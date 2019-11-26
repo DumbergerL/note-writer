@@ -30,25 +30,27 @@ Measure2
     .addNote( (new Note()).setDuration(24).setStep("B").setOctave(4) )
     .addNote( (new Note()).setDuration(24).setStep("B#").setOctave(4) )
     .addNote( (new Note()).setDuration(24).setStep("C").setOctave(5) );
-*/
+
 var Part1 = new Part("Piano von Lukas");
 Part1
     .addMeasure( Measure1 );
     /*.addMeasure( Measure2 )
-    .addMeasure( Measure3 );*/
+    .addMeasure( Measure3 );
 
 var theMusic = new Composition();
 theMusic.addPart(Part1);    
 
-OSMD.renderMusicXML( theMusic.toMusicXML() );
+OSMD.renderMusicXML( theMusic.toMusicXML() );*/
 
 var theStream = new NoteStream( new MIDIController());
 
 var theProcessor = new NoteProcessor();
 
 theStream.registerCallback( note => {
-    if(note.step === 'C' && note.octave === 1){
+    if(note.step === 'A' && note.octave === 0){
         theProcessor.processNoteDuration();
+    }else if(note.step == 'B' && note.octave === 0){
+        theProcessor.downloadNotesheet();
     }else{
         theProcessor.pushNote(note); 
     }

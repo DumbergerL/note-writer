@@ -2,6 +2,7 @@ const BPM = require('../Utils/BPM');
 const OSMD = require('../OSMD/index');
 const {Composition, Part, Measure} = require('../MusicXML/Composition');
 const DBSCAN = require('./Clustering/dbscan');
+const Note = require('../Utils/Note');
 
 class NoteProcessor{
 
@@ -51,12 +52,34 @@ class NoteProcessor{
             let clusterId = dbscan4.getClusterIdOfRecord( note );
             let duration = map.filter( element => element.cluster_id === clusterId)[0].duration;
             note.setDuration( duration);
-
-            this._part.addNote( note );
         });
-        
 
+        for(let i = 0; i < (this._notes.length-1); i++){
+            console.log("NOTE "+i);
+            let note1 = this._notes[i];
+            let note2 = this._notes[i+1];
+
+            let restTime = note2.timestampStart - note1.timestampEnd;
+            try{
+                let restNote = new Note()
+                    .setTimestampStart( note1.timestampEnd + 1)
+                    .setTimestampEnd( note2.timestampStart - 1 );
+                let clusterId = dbscan4.getClusterIdOfRecord( restNote );
+                let duration = map.filter( el => el.cluster_id === clusterId)[0].duration;
+                
+                restNote.setDuration( duration ); 
+                
+                this._notes.splice( i+1, 0, restNote);
+            }catch(e){} //not clusterable
+        }
+
+        this._notes.forEach( note => this._part.addNote( note ));        
         OSMD.renderMusicXML( this._composition.toMusicXML() );
+    }
+
+
+    downloadNotesheet(){
+        this._composition.download();
     }
 }
 
