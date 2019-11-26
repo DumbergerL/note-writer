@@ -67,6 +67,22 @@ class Cluster{
         return this._maxDistance;
     }
 
+    get maxElement(){
+        if(this._elements.length <= 0)throw "No elements available!";
+        this._elements.sort( (a,b) => {
+            return (a.durationTimestamp - b.durationTimestamp);
+        });
+        return this._elements[0];
+    }
+
+    get minElement(){
+        if(this._elements.length <= 0)throw "No elements available!";
+        this._elements.sort( (a,b) => {
+            return (b.durationTimestamp - a.durationTimestamp);
+        });
+        return this._elements[0];
+    }
+
     get id(){
         return this._id;
     }

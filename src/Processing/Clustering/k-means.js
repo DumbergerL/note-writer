@@ -1,19 +1,14 @@
 const Note = require('../../Utils/Note');
 const {Cluster } = require('./Utils');
+const ClusterAlgorithm = require('./ClusterAlgorithm');
 
-class kMeans{
+class kMeans extends ClusterAlgorithm{
 
     constructor(k = null){
         if(!Number.isInteger(k) && k < 0)throw "k must be int and greater zero!";
-
+        super();
+        
         this._k = k;
-        this._cluster = [];
-        this._dataset = [];
-    }
-
-    setDataset( noteArray ){
-        this._dataset = noteArray;
-        return this;
     }
 
     generateCluster(maxIterations = 4){
@@ -67,7 +62,7 @@ class kMeans{
         return minCluster;
     }
 
-    getClusterIdOfRecord( note ){
+    _getClusterIdOfRecord( note ){
         return this.getNearestCluster(note).id;
     }
 }

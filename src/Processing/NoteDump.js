@@ -1,5 +1,6 @@
 const Note = require('../Utils/Note');
 const KMeans = require('./Clustering/k-means');
+const DBSCAN = require('./Clustering/dbscan');
 
 class NoteDump{
 
@@ -28,6 +29,14 @@ class NoteDump{
         k5Means.setDataset( this._dump ).generateCluster(100);
 
 
+        let dbscan1 = new DBSCAN( 25 ).setDataset( this._dump ).generateCluster();
+        let dbscan2 = new DBSCAN( 50 ).setDataset( this._dump ).generateCluster();
+        let dbscan3 = new DBSCAN( 100 ).setDataset( this._dump ).generateCluster();
+        let dbscan4 = new DBSCAN( 200 ).setDataset( this._dump ).generateCluster(); // <-- performet am besten!
+        let dbscan5 = new DBSCAN( 300 ).setDataset( this._dump ).generateCluster();
+        let dbscan6 = new DBSCAN( 400 ).setDataset( this._dump ).generateCluster();
+        
+
         this._dump.forEach( (note, index) => {
             if(index === this._dump.length - 1)return;  //ignore last Element
             let noteJSON = note.toJSON();
@@ -35,6 +44,14 @@ class NoteDump{
             noteJSON['cluster_k3'] = k3Means.getClusterIdOfRecord(note);
             noteJSON['cluster_k4'] = k4Means.getClusterIdOfRecord(note);
             noteJSON['cluster_k5'] = k5Means.getClusterIdOfRecord(note);
+
+            noteJSON['cluster_dbscan1'] = dbscan1.getClusterIdOfRecord(note);
+            noteJSON['cluster_dbscan2'] = dbscan2.getClusterIdOfRecord(note);
+            noteJSON['cluster_dbscan3'] = dbscan3.getClusterIdOfRecord(note);
+            noteJSON['cluster_dbscan4'] = dbscan4.getClusterIdOfRecord(note);
+            noteJSON['cluster_dbscan5'] = dbscan5.getClusterIdOfRecord(note);
+            noteJSON['cluster_dbscan6'] = dbscan6.getClusterIdOfRecord(note);
+
             json.push( noteJSON );
 
         });
