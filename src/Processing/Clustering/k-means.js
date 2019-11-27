@@ -11,7 +11,7 @@ class kMeans extends ClusterAlgorithm{
         this._k = k;
     }
 
-    generateCluster(maxIterations = 4){
+    generateCluster(maxIterations = 100){
         this._cluster = [];
         if(this._dataset.length < this._k)throw "Dataset must be more elements then "+this._k;
 
@@ -50,6 +50,7 @@ class kMeans extends ClusterAlgorithm{
                 cluster.dumpElements();
             });
         }
+        return this;
     }
 
     getNearestCluster( note ){

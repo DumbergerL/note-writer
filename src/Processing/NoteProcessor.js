@@ -2,13 +2,14 @@ const BPM = require('../Utils/BPM');
 const OSMD = require('../OSMD/index');
 const {Composition, Part, Measure} = require('../MusicXML/Composition');
 const DBSCAN = require('./Clustering/dbscan');
+const KMeans = require('./Clustering/k-means');
 const Note = require('../Utils/Note');
 
 class NoteProcessor{
 
     constructor(){
         this._notes = [];
-        this._composition = new Composition();
+        this._composition = new Composition().setTitle("In Dreams");
         this._part = new Part('P1').setName('Special Piano');
 
         this._composition.addPart( this._part );
@@ -19,7 +20,8 @@ class NoteProcessor{
     }
 
     processNoteDuration(){
-        let dbscan4 = new DBSCAN( 200 ).setDataset( this._notes ).generateCluster(); 
+        //let dbscan4 = new DBSCAN( 200 ).setDataset( this._notes ).generateCluster(); 
+        let dbscan4 = new KMeans(4).setDataset( this._notes ).generateCluster();
 
         let map = dbscan4.getClusterCentroidMap();
     
@@ -54,7 +56,7 @@ class NoteProcessor{
             note.setDuration( duration);
         });
 
-        for(let i = 0; i < (this._notes.length-1); i++){
+        /*for(let i = 0; i < (this._notes.length-1); i++){
             console.log("NOTE "+i);
             let note1 = this._notes[i];
             let note2 = this._notes[i+1];
@@ -71,7 +73,7 @@ class NoteProcessor{
                 
                 this._notes.splice( i+1, 0, restNote);
             }catch(e){} //not clusterable
-        }
+        }*/
 
         this._notes.forEach( note => this._part.addNote( note ));        
         OSMD.renderMusicXML( this._composition.toMusicXML() );

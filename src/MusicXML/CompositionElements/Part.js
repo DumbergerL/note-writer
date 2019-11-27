@@ -23,10 +23,16 @@ class Part extends MusicXMLParser{
     addNote(note){
         Note.validate(note);
         var latestMeasure = this._measures[this._measures.length - 1];
-        if(latestMeasure === undefined || latestMeasure.measureDuration >= 96){
+        
+        if(latestMeasure === undefined){
             this.addMeasure( new Measure( this._measures.length+1 ));    
             latestMeasure = this._measures[this._measures.length - 1];
         }
+
+        /*if(latestMeasure === undefined || latestMeasure.measureDuration >= 96){   // create new Measure on overflow
+            this.addMeasure( new Measure( this._measures.length+1 ));    
+            latestMeasure = this._measures[this._measures.length - 1];
+        }*/
 
         latestMeasure.addNote( note );
         return this;
