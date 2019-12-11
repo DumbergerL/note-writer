@@ -1,0 +1,63 @@
+:root{
+    --note-height: 20px;
+    --key-width: 80px;
+}
+
+.piano-role{
+    background-color: #4B4B4B;
+
+    .workbench{
+
+        .piano{
+            .swimlane{
+                height: var(--note-height);
+                display: flex;
+                
+                .key{
+                    width: var(--key-width);
+                    position: relative;
+                    background-color: white;
+                    border: 0.5px solid black;
+                    z-index: 10;
+                }
+                .key-cS, .key-dS, .key-fS, .key-gS, .key-aS{
+                    background-color: black;
+                    height: var(--note-height);
+                    width: calc( var(--key-width) * 0.6);
+                    margin-right: calc( var(--key-width) * 0.4);
+                } 
+    
+                .key-c, .key-f{ //expand to top
+                    margin-top: calc( var(--note-height) / -2);
+                    height: calc(  var(--note-height) * 1.5 );
+                    z-index: 5;
+                }
+                .key-b, .key-e{ //expand to bottom
+                    margin-bottom: calc( var(--note-height) / -2);
+                    height: calc(  var(--note-height) * 1.5 );
+                    z-index: 5;
+                }
+                .key-a, .key-g, .key-d{ //expand to both
+                    margin-bottom: calc( var(--note-height) / -2);
+                    margin-top: calc( var(--note-height) / -2);
+                    height: calc(  var(--note-height) * 2);
+                    z-index: 5;
+                } // root.style.setProperty('--mouse-x', e.clientX + "px");
+
+                .notes{
+                    height: 100%;
+                    .note{
+                        height: 100%;
+                        background-color: #FF6EFF;
+                        border-radius: 20px;
+                        width: 50px;
+                    }
+                }
+
+            }
+
+                      
+        }
+    }
+}
+
