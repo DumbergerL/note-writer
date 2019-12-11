@@ -8,10 +8,13 @@
 
     .workbench{
 
+        padding: 30px 20px;
+
         .piano{
             .swimlane{
                 height: var(--note-height);
                 display: flex;
+                border-top: 0.2px solid #363535;
                 
                 .key{
                     width: var(--key-width);
@@ -46,6 +49,7 @@
 
                 .notes{
                     height: 100%;
+                    width: 100%;
                     .note{
                         height: 100%;
                         background-color: #FF6EFF;

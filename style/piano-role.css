@@ -6,9 +6,13 @@
 .piano-role {
   background-color: #4B4B4B;
 }
+.piano-role .workbench {
+  padding: 30px 20px;
+}
 .piano-role .workbench .piano .swimlane {
   height: var(--note-height);
   display: flex;
+  border-top: 0.2px solid #363535;
 }
 .piano-role .workbench .piano .swimlane .key {
   width: var(--key-width);
@@ -41,6 +45,7 @@
 }
 .piano-role .workbench .piano .swimlane .notes {
   height: 100%;
+  width: 100%;
 }
 .piano-role .workbench .piano .swimlane .notes .note {
   height: 100%;

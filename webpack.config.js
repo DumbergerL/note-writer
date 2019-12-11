@@ -1,10 +1,13 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: {
+      "note-writer": './src/index.js',
+      "piano-role": './src/UI/PianoRole/index.js'
+    },
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'note-writer.js'
+      filename: '[name].js'
     },
     mode: 'development',
     devtool: 'inline-source-map',
