@@ -5,6 +5,7 @@
 
 .piano-role{
     background-color: #4B4B4B;
+    border-radius: 4px;
 
     .workbench{
 
@@ -45,7 +46,7 @@
                     margin-top: calc( var(--note-height) / -2);
                     height: calc(  var(--note-height) * 2);
                     z-index: 5;
-                } // root.style.setProperty('--mouse-x', e.clientX + "px");
+                }
 
                 .notes{
                     height: 100%;

@@ -56,6 +56,9 @@ theStream.registerCallback( note => {
     }
 });
 
+window.STREAM = theStream;
+window.PROCESSOR = theProcessor;
+
 /*
 theStream.registerCallback( note => {
     note.setDuration( BPM.GET_DURATION_C80140( note ));

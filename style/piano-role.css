@@ -5,6 +5,7 @@
 
 .piano-role {
   background-color: #4B4B4B;
+  border-radius: 4px;
 }
 .piano-role .workbench {
   padding: 30px 20px;

@@ -5,196 +5,113 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Piano Trainer</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel="stylesheet" href="http://cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
-    <link rel="stylesheet" href="http://cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+    <link rel="stylesheet" href="./style/fontawesome-free-5.11.2-web/css/all.min.css">
+    <link rel="stylesheet" href="./style/bulma.min.css">
     <link rel="stylesheet" href="./style/piano-role.css">
+    <link rel="stylesheet" href="./style/glowing-button.css">    
     <style>
-        body{
-            padding: 40px;
-        }
-        .column{
-            text-align: center
-        }
-
-        .recorder{
-            border: 2px #8c8c8c solid;
-            border-radius: .4rem;
-            padding: 20px;
-        }
-        .recorder > .row{
-            padding: 15px;
-        }
-        .recorder .bank-row button{
-            width: 100%;
-        }
-
-        .button-small {
-            font-size: .8rem;
-            height: 2.8rem;
-            line-height: 2.8rem;
-            padding: 0 1.5rem;
-        }
-
-        .button-large {
-            font-size: 1.4rem;
-            height: 4.5rem;
-            line-height: 4.5rem;
-            padding: 0 2rem;
-        }
-
-        button.muted{
-            background-color: grey;
-            border-color: grey;
-        }
+        
     </style>
 </head>
 <body>
-    <!--h1>MIDI Piano Trainer</h1>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus facilis officia itaque adipisci vel aliquam nobis eum omnis, explicabo sit culpa, ipsam nesciunt veritatis ad natus aperiam! Placeat, quia sit.</p>
-    <button id="startSynthi">START SYNTHI!</button-->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://bulma.io">
+            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+            </a>
+        
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            </a>
+        </div>
+        
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item">Record</a>
+                <a class="navbar-item">Download</a>
+            </div>
+        </div>
+        
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-primary">
+                        <strong>Settings</strong>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-    <div class="container recorder">
-        <div class="row">
-            <div class="column" id="selectedDevice">...</div>
-            <div class="column" id="selectedChanel">...</div>
-        </div>
-        <div class="row" style="justify-content: center;">
-            <div class="column">
-                <button class="button-large" id="clearRecord">CLEAR RECORD</button>
-            </div>
-            <div class="column">
-                <button class="button-large" id="playRecord">PLAY RECORD</button>
-            </div>
-        </div>
-        <div class="row bank-row">
-            <div class="column">
-                <button class="button-outline">Bank1</button>
-            </div>
-            <div class="column">
-                <button class="button-outline">Bank2</button>
-            </div>
-            <div class="column">
-                <button class="button-outline">Bank3</button>
-            </div>
-            <div class="column">
-                <button class="button-outline">Bank4</button>
-            </div>
-            <div class="column">
-                <button class="button-outline">Bank5</button>
-            </div>
-            <div class="column">
-                <button class="button-outline">Bank6</button>
-            </div>       
-        </div>
+    <div class="container is-fluid">
+            <div class="field has-addons">
+                    <p class="control">
+                      <button class="button is-large" id="button-record">
+                        <span class="icon is-small">
+                          <i class="fas fa-compact-disc"></i>
+                        </span>
+                        <span>Record</span>
+                      </button>
+                    </p>
+                    <p class="control">
+                      <button class="button is-large" id="button-play">
+                        <span class="icon is-small">
+                          <i class="fas fa-play"></i>
+                        </span>
+                        <span>Play</span>
+                      </button>
+                    </p>
+                    <p class="control">
+                      <button class="button is-large" id="button-clear">
+                        <span class="icon is-small">
+                          <i class="fas fa-trash"></i>
+                        </span>
+                        <span>Clear</span>
+                      </button>
+                    </p>
+                  </div>
+
     </div>
+
+
+    <div class="container is-fluid">
+        <div class="piano-role" id="piano-role-1">
+            <div class="workbench">
+                <div class="piano">
+                    <!--div class="swimlane">
+                        <div class="key key-c octave-4"></div>
+                        <div class="notes">
+                            <div class="note"></div>
+                        </div>
+                    </div>
+                    <div class="swimlane">
+                        <div class="key key-b octave-3"></div>
+                        <div class="notes">
+                            <div class="note"></div>
+                        </div>
+                    </div>
+                    <div class="swimlane">
+                        <div class="key key-aS octave-3"></div>
+                        <div class="notes">
+                            <div class="note"></div>
+                        </div>
+                    </div-->
+                </div>
+            </div>
+        </div>
+
+    </div>    
+
+
     <div id="osmdContainer"></div>
 
-    <div class="piano-role" id="piano-role-1">
-        <div class="workbench">
-            <div class="piano">
-                <div class="swimlane">
-                    <div class="key key-cS octave-5"></div>
-                    <div class="notes">
-                        <div class="note"></div>
-                    </div>
-                </div>
-                <div class="swimlane">
-                    <div class="key key-c octave-5"></div>
-                    <div class="notes">
-                        <div class="note"></div>
-                    </div>
-                </div>
-                <div class="swimlane">
-                    <div class="key key-b octave-4"></div>
-                    <div class="notes">
-                        <div class="note"></div>
-                    </div>
-                </div>
-                <div class="swimlane">
-                    <div class="key key-aS octave-4"></div>
-                    <div class="notes">
-                        <div class="note"></div>
-                    </div>
-                </div>
-                <div class="swimlane">
-                    <div class="key key-a octave-4"></div>
-                    <div class="notes">
-                        <div class="note"></div>
-                    </div>
-                </div>
-                <div class="swimlane">
-                    <div class="key key-gS octave-4"></div>
-                    <div class="notes">
-                        <div class="note"></div>
-                    </div>
-                </div>
-                <div class="swimlane">
-                    <div class="key key-g octave-4"></div>
-                    <div class="notes">
-                        <div class="note"></div>
-                    </div>
-                </div>
-                <div class="swimlane">
-                    <div class="key key-fS octave-4"></div>
-                    <div class="notes">
-                        <div class="note"></div>
-                    </div>
-                </div>
-                <div class="swimlane">
-                    <div class="key key-f octave-4"></div>
-                    <div class="notes">
-                        <div class="note"></div>
-                    </div>
-                </div>
-                <div class="swimlane">
-                    <div class="key key-e octave-4"></div>
-                    <div class="notes">
-                        <div class="note"></div>
-                    </div>
-                </div>
-                <div class="swimlane">
-                    <div class="key key-dS octave-4"></div>
-                    <div class="notes">
-                        <div class="note"></div>
-                    </div>
-                </div>
-                <div class="swimlane">
-                    <div class="key key-d octave-4"></div>
-                    <div class="notes">
-                        <div class="note"></div>
-                    </div>
-                </div>
-                <div class="swimlane">
-                    <div class="key key-cS octave-4"></div>
-                    <div class="notes">
-                        <div class="note"></div>
-                    </div>
-                </div>
-                <div class="swimlane">
-                    <div class="key key-c octave-4"></div>
-                    <div class="notes">
-                        <div class="note"></div>
-                    </div>
-                </div>
-                <div class="swimlane">
-                    <div class="key key-b octave-3"></div>
-                    <div class="notes">
-                        <div class="note"></div>
-                    </div>
-                </div>
-                <div class="swimlane">
-                    <div class="key key-aS octave-3"></div>
-                    <div class="notes">
-                        <div class="note"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-    </div>
 
 </body>
 <script src="node_modules/opensheetmusicdisplay/build/opensheetmusicdisplay.min.js"></script>
 <script src='dist/note-writer.js'></script>
 <script src="dist/piano-role.js"></script>
+<script src="dist/ui.js"></script>
 </html>
