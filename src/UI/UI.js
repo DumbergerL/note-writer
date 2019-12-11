@@ -13,9 +13,11 @@ $(function(){
         $('#button-record').toggleClass('glow');
 
         if($('#button-record').hasClass('glow')){
-                                                            console.log("RECORDING....");
+            window.PROCESSOR.clearNotes();
+            window.STREAM.setActive();
         }else{
-                                                            console.log("END RECORDING...");
+            window.STREAM.setInactive();
+            window.PIANO_ROLE.visualizeNotes( window.PROCESSOR.notes );
         }
     });
 
@@ -32,7 +34,8 @@ $(function(){
     });
 
     $('#button-clear').click( () => {
-                                                            console.log("CLEAR RECORDING!");
+        window.PROCESSOR.clearNotes();
+        window.PIANO_ROLE.clearNotes();
     });
     
 });

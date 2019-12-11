@@ -5,9 +5,11 @@ class PianoRole{
 
     constructor(pianoRoleID){
         this._pianoRoleID = pianoRoleID;
+        this._visualizedNotes = [];
     }
 
     visualizeNotes( noteArray ){
+        this._visualizedNotes = noteArray;
         var minNote = noteArray[0];
         var maxNote = noteArray[0];
 
@@ -20,9 +22,11 @@ class PianoRole{
         this._outputNotes( noteArray );
     }
 
+    clearNotes(){
+        $(this._pianoRoleID+" .note").remove();
+    }
+
     _initPianoRole(fromNote, toNote){
-        Note.validate(fromNote);
-        Note.validate(toNote);
         if(fromNote.octave > toNote.octave)throw "Corrupt Notes!";
 
         $(this._pianoRoleID+' div.piano').empty();
@@ -58,16 +62,19 @@ class PianoRole{
             }
         });
 
-        let scale = $('.swimlane').first().width() / (maxTimestamp - minTimestamp);
-        console.log(maxTimestamp, scale);
+        let noteWorspaceWidth = $('.swimlane .notes').first().width();
+        let scale = noteWorspaceWidth / (maxTimestamp - minTimestamp);
+        console.log(maxTimestamp);
+        console.log("WIDTH:", noteWorspaceWidth);
 
         noteArray.forEach( note => {
             let pianoRoleId = this._getPianoRoleId(note);
             let offset = (note.timestampStart - minTimestamp) * scale;
+            let offsetPercent = (note.timestampStart - minTimestamp) / (maxTimestamp - minTimestamp);
             let width = note.durationTimestamp * scale;
 
             $('.key.key-'+ pianoRoleId +'.octave-'+note.octave+' + .notes').first().append(`
-                <div class="note" style="margin-left: `+offset+`px; width: `+ width +`px;">XX</div>
+                <div class="note" style="margin-left: `+offset+`px; width: `+ width +`px;"></div>
             `);
         });     
     }
@@ -86,7 +93,6 @@ class PianoRole{
     }
 
     _getPianoRoleIndex(note){
-        Note.validate(note);
         let index = PianoRoleIds.indexOf( note.step.toLowerCase() );
         if(index === undefined)throw "Can't find Piano Role Index";
 
@@ -99,7 +105,6 @@ class PianoRole{
     }
 
     _calcNoteValue( note ){
-        Note.validate( note );
         return (note.octave * PianoRoleIds.length) + (this._getPianoRoleIndex(note));
     }
 }

@@ -15,8 +15,18 @@ class NoteProcessor{
         this._composition.addPart( this._part );
     }
 
+    get notes(){
+        return this._notes;
+    }
+
     pushNote(note){
         this._notes.push(note);
+        return this;
+    }
+
+    clearNotes(){
+        this._notes = [];
+        return this;
     }
 
     processNoteDuration(){

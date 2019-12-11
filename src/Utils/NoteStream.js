@@ -6,6 +6,7 @@ class NoteStream{
     constructor(midiController){
         if(!(midiController instanceof MidiController))throw "Parameter must be a instance of MidiController!";
         this._midiController = midiController;
+        this._active = true;
 
         this._midiController.initController().then( () => {
             this._midiController.onNoteOn( (event) => {
@@ -25,6 +26,17 @@ class NoteStream{
     registerCallback( callback ){
         if(typeof callback !== "function")throw "Parameter must be function!";
         this._callbacks.push(callback);
+        return this;
+    }
+
+    setActive(){
+        this._active = true;
+        return this;
+    }
+
+    setInactive(){
+        this._active = false;
+        return this;
     }
 
     _onNote(event){
@@ -53,6 +65,8 @@ class NoteStream{
     }
 
     _sendNote( note ){
+        if(!this._active)return;
+        
         this._callbacks.forEach( callback => {
             callback(note);
         });

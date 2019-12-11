@@ -43,6 +43,7 @@ theMusic.addPart(Part1);
 OSMD.renderMusicXML( theMusic.toMusicXML() );*/
 
 var theStream = new NoteStream( new MIDIController());
+theStream.setInactive();
 
 var theProcessor = new NoteProcessor();
 
