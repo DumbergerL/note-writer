@@ -36,6 +36,7 @@ class TonePiano{
         if(this._recordedNotes.length <= 0)return;
         //this._initPiano();
 
+        window.TRANSPORT = Tone.Transport;
 
         Tone.Transport.stop();
         Tone.Transport.position = 0;
@@ -43,11 +44,15 @@ class TonePiano{
 
         this._setNotesToT0();
 
-        this._recordedNotes.forEach( note => {
-            this._piano.triggerAttackRelease( (note.step+''+note.octave), (note.durationTimestamp/1000), (note.timestampStart/1000))
-        });
-
-        Tone.Transport.start();
+            this._recordedNotes.forEach( note => {
+                console.log("SCHEDULE:", (note.step+''+note.octave), (note.durationTimestamp/1000), (note.timestampStart/1000));
+                Tone.Transport.scheduleRepeat((time) => {
+                    this._piano.triggerAttackRelease( (note.step+''+note.octave), (note.durationTimestamp/1000), (note.timestampStart/1000));
+                });
+            });    
+        
+        //Tone.Transport.loop = true;
+        //Tone.Transport.start();
 /*        var tick = 0;
         var interval = 5;
         var clockInterval = setInterval(() => {
