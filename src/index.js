@@ -7,7 +7,7 @@ const NoteStream = require('./Utils/NoteStream');
 const NoteProcessor = require('./Processing/NoteProcessor');
 const {Composition, Part, Measure} = require('./MusicXML/Composition');
 const NoteDump = require('./Processing/NoteDump');
-
+const Piano = require('./MIDI/TonePiano');
 //window.Note = Note;
 //window.Composition = Composition;
 //window.Part = Part;
@@ -46,6 +46,7 @@ var theStream = new NoteStream( new MIDIController());
 theStream.setInactive();
 
 var theProcessor = new NoteProcessor();
+var thePiano = new Piano();
 
 theStream.registerCallback( note => {
     if(note.step === 'A' && note.octave === 0){
@@ -54,11 +55,13 @@ theStream.registerCallback( note => {
         theProcessor.downloadNotesheet();
     }else{
         theProcessor.pushNote(note); 
+        thePiano.addNote( note );
     }
 });
 
 window.STREAM = theStream;
 window.PROCESSOR = theProcessor;
+window.PIANO = thePiano;
 
 /*
 theStream.registerCallback( note => {

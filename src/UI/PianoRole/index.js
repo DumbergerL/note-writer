@@ -64,9 +64,7 @@ class PianoRole{
 
         let noteWorspaceWidth = $('.swimlane .notes').first().width();
         let scale = noteWorspaceWidth / (maxTimestamp - minTimestamp);
-        console.log(maxTimestamp);
-        console.log("WIDTH:", noteWorspaceWidth);
-
+        
         noteArray.forEach( note => {
             let pianoRoleId = this._getPianoRoleId(note);
             let offset = (note.timestampStart - minTimestamp) * scale;

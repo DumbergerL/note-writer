@@ -1,11 +1,5 @@
 const $ = require('jquery');
 
-/*
-var DigitalPiano = new MIDIController();
-var Recorder = new MIDIRecorder();
-*/
-
-
 $(function(){
     
     $('#button-record').click( () => {
@@ -27,15 +21,17 @@ $(function(){
         $('#button-play i').toggleClass('fa-play');
         
         if($('#button-play i').hasClass('fa-play')){
-                                                            console.log("PLAY RECORDING!");
+            console.log("PAUSE PIANO");                                                       
         }else{
-                                                            console.log("PAUSE PLAY RECORDING!");
+            window.PIANO.playRecord(); 
+            
         }
     });
 
     $('#button-clear').click( () => {
         window.PROCESSOR.clearNotes();
         window.PIANO_ROLE.clearNotes();
+        window.PIANO.clearRecord();
     });
     
 });
