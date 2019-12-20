@@ -8,6 +8,7 @@ $(function(){
 
         if($('#button-record').hasClass('glow')){
             window.PROCESSOR.clearNotes();
+            window.PIANO.clearRecord();
             window.STREAM.setActive();
         }else{
             window.STREAM.setInactive();
