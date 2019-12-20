@@ -21,7 +21,7 @@ $(function(){
         $('#button-play i').toggleClass('fa-play');
         
         if($('#button-play i').hasClass('fa-play')){
-            console.log("PAUSE PIANO");                                                       
+            window.PIANO.pauseRecord();                                                     
         }else{
             window.PIANO.playRecord(); 
             
