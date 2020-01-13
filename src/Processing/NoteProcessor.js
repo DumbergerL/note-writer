@@ -30,8 +30,8 @@ class NoteProcessor{
     }
 
     processNoteDuration(){
-        //let dbscan4 = new DBSCAN( 200 ).setDataset( this._notes ).generateCluster(); 
-        let dbscan4 = new KMeans(4).setDataset( this._notes ).generateCluster();
+        let dbscan4 = new DBSCAN( 200 ).setDataset( this._notes ).generateCluster(); 
+        //let dbscan4 = new KMeans(4).setDataset( this._notes ).generateCluster();
 
         let map = dbscan4.getClusterCentroidMap();
     
