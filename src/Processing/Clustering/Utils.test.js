@@ -46,3 +46,24 @@ test('Getter (getDistance, elements, centroid, maxDistance, id) to return right 
     expect( theCluster.elements ).toEqual( theCluster._elements);
     expect( theCluster.id ).toEqual( theCluster._id );
 });
+
+test('max- and minElement', () => {
+    let theCluster = new Cluster();
+    let n1 = new Note().setTimestampStart(0).setTimestampEnd(20),
+        n2 = new Note().setTimestampStart(0).setTimestampEnd(10),
+        n3 = new Note().setTimestampStart(0).setTimestampEnd(150),
+        n4 = new Note().setTimestampStart(0).setTimestampEnd(12),
+        n5 = new Note().setTimestampStart(0).setTimestampEnd(5);
+    
+    expect( () => { theCluster.maxElement }).toThrow();
+    expect( () => { theCluster.minElement }).toThrow();
+    
+    theCluster.addElement(n1)
+        .addElement(n2)
+        .addElement(n3)
+        .addElement(n4)
+        .addElement(n5);
+        
+    expect( theCluster.maxElement ).toBeInstanceOf( Note );
+    expect( theCluster.minElement ).toBeInstanceOf( Note );
+});

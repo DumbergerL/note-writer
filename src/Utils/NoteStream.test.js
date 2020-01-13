@@ -19,7 +19,7 @@ test('constructor parameter must be instance of MidiController', () => {
 });
 
 test('registerCallback to excpect function', () => {
-    expect( noteStream.registerCallback( () => {})).toEqual( undefined );
+    expect( noteStream.registerCallback( () => {})).toBeInstanceOf( NoteStream );
     expect(() => { noteStream.registerCallback() }).toThrow();
     expect(() => { noteStream.registerCallback("String") }).toThrow();
     expect(() => { noteStream.registerCallback(2) }).toThrow();   
