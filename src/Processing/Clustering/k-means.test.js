@@ -35,6 +35,4 @@ test('Generate cluster', () => {
     expect(testKMeans.generateCluster() ).toBeInstanceOf(kMeans);
 
     expect(typeof testKMeans.getClusterIdOfRecord(exampleNote)).toBe('string');
-
-    console.log(testKMeans.getClusterCentroidMap());
 });
