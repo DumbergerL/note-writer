@@ -23,8 +23,6 @@ class kMeans extends ClusterAlgorithm{
         }
 
         for(let i = 0; i < maxIterations; i++){    //Zuordnung
-            console.log("\nITERATION "+i+"\n");
-
             let noRecordSwitchedCluster = true;
             this._dataset.forEach( note => {
                 let bestCluster = this.getNearestCluster( note );
@@ -40,12 +38,10 @@ class kMeans extends ClusterAlgorithm{
             });
 
             if(noRecordSwitchedCluster){
-                console.log("BREAK BECAUSE NOTHING CHANGED!");
                 break;
             }
 
             this._cluster.forEach( cluster => { //Aktualisierung
-                console.log( cluster.id  + " - " + cluster.centroid + " ("+ cluster.elements.length +")");
                 cluster.calcCentroid();
                 cluster.dumpElements();
             });

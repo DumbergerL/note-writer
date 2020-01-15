@@ -20,3 +20,19 @@ test('addPart parameter expect to be instance of Part', () => {
     expect( composition.addPart( new Part(1)) ).toBeInstanceOf( Composition );
     expect( () => {composition.addPart(2) }).toThrow();
 });
+
+
+test('ToMusicXML Responds with object', () => {
+    let oneComposition = new Composition();
+
+    expect( typeof oneComposition.toMusicXMLinJSON() ).toBe("object");
+
+    oneComposition.setTitle('example title');
+    oneComposition.addPart( new Part(1) );
+
+    expect( typeof oneComposition.toMusicXMLinJSON() ).toBe("object");
+});
+
+test('Download Composition', () => {
+    expect( composition.download() ).toBe(undefined);
+});

@@ -42,4 +42,16 @@ test('add new Measure if no measure exists and note comes in', () => {
     let cleanPart = new Part(1);
 
     expect( cleanPart.addNote( new Note()) ).toBeInstanceOf( Part );
-})
+});
+
+test('ToMusicXML / ToMusicXMLPartListInJSON Responds with object', () => {
+    
+    let part = new Part(1).addMeasure( new Measure(1));
+
+    expect( typeof part.toMusicXMLinJSON() ).toBe('object');
+    expect( typeof part.toMusicXMLPartListinJSON() ).toBe('object'); 
+    
+    part.setName(null);
+    expect( typeof part.toMusicXMLPartListinJSON() ).toBe('object'); 
+    
+});

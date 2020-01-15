@@ -10,6 +10,7 @@ class DBSCAN extends ClusterAlgorithm{
     }
 
     generateCluster(){
+        if(this._dataset.length <= 0) throw "There is no data set, to generate Clusters from.";
         this._dataset.sort( (a,b) => {
             return (a.durationTimestamp - b.durationTimestamp);
         });

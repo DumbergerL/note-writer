@@ -36,3 +36,11 @@ test('setter return this', () => {
     expect( measure.setAttributes( {} )).toBeInstanceOf( Measure );
     expect( measure.addNote( new Note() ) ).toBeInstanceOf( Measure );
 });
+
+test('ToMusicXML Responds with object', () => {
+    expect(() => { measure.toMusicXMLinJSON() }).toThrow();
+
+    let newMeasure = new Measure(2);
+
+    expect( typeof newMeasure.toMusicXMLinJSON() ).toBe('object');
+});
