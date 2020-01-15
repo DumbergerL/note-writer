@@ -13,3 +13,13 @@ test('Setter/functions (setDataset, getClusterIdOfRecord, getClusterCentroidMap)
     expect( clusterAlgorithm.setDataset( [(new Note()).setStep('C'), (new Note()).setStep('C')] )).toBeInstanceOf( ClusterAlgorithm );
 });
 
+
+test('getClusterIDofRecord throws, because its ment to be abstract', () => {
+    let clusterAlgorithm = new ClusterAlgorithm();
+    expect(() => { clusterAlgorithm.getClusterIdOfRecord() }).toThrow();
+});
+
+test('getClusterCentroidMap responds [] when no data is set', () => {
+    let clusterAlgorithmWithoutCluster = new ClusterAlgorithm();
+    expect( clusterAlgorithmWithoutCluster.getClusterCentroidMap() ).toEqual( [] );
+});
