@@ -1,7 +1,7 @@
 const Note = require('../../Utils/Note');
 const {Cluster } = require('./Utils');
 
-class ClusterAlgorithm{
+class ClusterAlgorithm{ //ABSTRACT
 
     constructor(){
         this._cluster = [];
