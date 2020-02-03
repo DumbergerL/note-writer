@@ -2,6 +2,11 @@ const $ = require('jquery');
 
 $(function(){
     
+    setTimeout( () => {
+        $('#status-button-title').text(''+STREAM._midiController.output.name);
+        $('#status-button').removeClass('is-loading');
+    }, 1500);
+
     $('#button-record').click( () => {
         $('#button-record').toggleClass('is-danger');
         $('#button-record').toggleClass('glow');

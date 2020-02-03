@@ -1,18 +1,18 @@
 const MIDIController = require('./MIDI/MIDIController');
-const MIDIRecorder = require('./MIDI/MIDIRecorder');
-const OSMD = require('./OSMD/index');
-const Note = require('./Utils/Note');
-const BPM = require('./Utils/BPM');
+//const MIDIRecorder = require('./MIDI/MIDIRecorder');
+//const OSMD = require('./OSMD/index');
+//const Note = require('./Utils/Note');
+//const BPM = require('./Utils/BPM');
 const NoteStream = require('./Utils/NoteStream');
 const NoteProcessor = require('./Processing/NoteProcessor');
-const {Composition, Part, Measure} = require('./MusicXML/Composition');
-const NoteDump = require('./Processing/NoteDump');
+//const {Composition, Part, Measure} = require('./MusicXML/Composition');
+//const NoteDump = require('./Processing/NoteDump');
 const Piano = require('./MIDI/TonePiano');
 //window.Note = Note;
 //window.Composition = Composition;
 //window.Part = Part;
 
-var Measure1 = new Measure(1);
+//var Measure1 = new Measure(1);
 /*var Measure2 = new Measure(2);
 var Measure3 = new Measure(3);
 
