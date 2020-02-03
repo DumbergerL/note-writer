@@ -36,9 +36,32 @@ $(function(){
 
     $('#button-clear').click( () => {
         window.PROCESSOR.clearNotes();
+        window.PROCESSOR.initComposition();
         window.PIANO_ROLE.clearNotes();
         window.PIANO.clearRecord();
+
     });
     
+
+    $('#process-dbscan').click( () => {
+        window.PROCESSOR.processNoteDurationDBSCAN();
+    });
+
+
+    $('#process-kmeans').click( () => {
+        window.PROCESSOR.processNoteDurationKMEANS();
+    });
+
+    $('#button-note-play').click( () => {
+        $('#button-note-play i').toggleClass('fa-pause');
+        $('#button-note-play i').toggleClass('fa-play');
+        
+        if($('#button-note-play i').hasClass('fa-play')){
+            window.PIANO.pauseRecord();                                                     
+        }else{
+            window.PIANO.playRecordDuration(); 
+            
+        }
+    });
 });
 

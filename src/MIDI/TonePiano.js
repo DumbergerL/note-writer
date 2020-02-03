@@ -55,6 +55,10 @@ class TonePiano{
         return this;
     }
 
+    setNotes( notes ){
+        this._recordedNotes = notes;
+        return this;
+    }
 
     _setNotesToT0(){
         var minTimestamp = this._recordedNotes[0].timestampStart;
@@ -77,17 +81,47 @@ class TonePiano{
         Tone.Transport.cancel();
 
         this._setNotesToT0();
-            this._recordedNotes.forEach( note => {
-                Tone.Transport.schedule( time => {
-                    this._piano.triggerAttackRelease( (note.step+''+ (note.alter === 1 ? '#' : note.alter === -1 ? 'b' : '')+note.octave), (note.durationTimestamp/1000) );
-                }, (note.timestampStart/1000));
-            });    
-
-            var endMelodie = this._recordedNotes[ this._recordedNotes.length - 1].timestampStart + this._recordedNotes[ this._recordedNotes.length - 1].durationTimestamp;
-
+        this._recordedNotes.forEach( note => {
             Tone.Transport.schedule( time => {
-                document.getElementById('button-play').click(); // REALLY BAD PROGRAMMING! - I know ;-)
-            }, (endMelodie/1000));
+                this._piano.triggerAttackRelease( (note.step+''+ (note.alter === 1 ? '#' : note.alter === -1 ? 'b' : '')+note.octave), (note.durationTimestamp/1000) );
+            }, (note.timestampStart/1000));
+        });    
+
+        var endMelodie = this._recordedNotes[ this._recordedNotes.length - 1].timestampStart + this._recordedNotes[ this._recordedNotes.length - 1].durationTimestamp;
+
+        Tone.Transport.schedule( time => {
+            document.getElementById('button-play').click(); // REALLY BAD PROGRAMMING! - I know ;-)
+        }, (endMelodie/1000));
+
+        Tone.Transport.start();
+    }
+
+    playRecordDuration(){
+        if(this._recordedNotes.length <= 0)return;
+
+        const BPM = 120;
+        const T_MIDI_STEP = 60 / (BPM * 24);
+
+        window.TRANSPORT = Tone.Transport;
+
+        Tone.Transport.stop();
+        Tone.Transport.position = 0;
+        Tone.Transport.cancel();
+
+        let currentMidiStep = 0;
+
+        this.recordedNotes.forEach( note => {
+            Tone.Transport.schedule( time => {
+                this._piano.triggerAttackRelease( (note.step+''+ (note.alter === 1 ? '#' : note.alter === -1 ? 'b' : '')+note.octave), (note.duration*T_MIDI_STEP) );
+            }, currentMidiStep * T_MIDI_STEP);
+            currentMidiStep += note.duration;
+        });
+
+        var endMelodie = currentMidiStep * T_MIDI_STEP;
+
+        Tone.Transport.schedule( time => {
+            document.getElementById('button-note-play').click(); // REALLY BAD PROGRAMMING! - I know ;-)
+        }, endMelodie);
 
         Tone.Transport.start();
     }
