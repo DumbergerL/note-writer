@@ -32,6 +32,28 @@ class Note extends MusicXMLParser{
 
     get isRest(){ return (this.step === null || this.octave === null); }
 
+    get color(){
+        let noteColor = '#FF6EFF';
+        switch (this.duration) {
+            case 6:
+                noteColor = '#FF8A24';
+                break;
+            case 12:
+                noteColor = '#C430FF';
+                break;
+            case 24:
+                noteColor = '#E82320';
+                break;
+            case 48:
+                noteColor = '#203AE8';
+                break;
+            case 96:
+                noteColor = '#0DF3FF';
+                break;
+        }
+        return noteColor;
+    }
+
     setStep(step){
         if(typeof step !== 'string')throw "Invalid step ("+step+") given in! Must be String!";
         if(step.includes('#')){

@@ -46,11 +46,13 @@ $(function(){
     $('#process-dbscan').click( () => {
         window.PROCESSOR.processNoteDurationDBSCAN();
         visualizeClusterMap(PROCESSOR._map);
+        window.PIANO_ROLE.visualizeNotes( window.PROCESSOR.notes );
     });
 
     $('#process-kmeans').click( () => {
         window.PROCESSOR.processNoteDurationKMEANS();
         visualizeClusterMap(PROCESSOR._map);
+        window.PIANO_ROLE.visualizeNotes( window.PROCESSOR.notes );
     });
 
     function visualizeClusterMap( clusterMap ){
@@ -59,7 +61,7 @@ $(function(){
         clusterMap.forEach((cluster, index) => {
             $('#cluster-map-table-body').append(`
                 <tr>
-                    <td>`+index+`</td>
+                    <td><span class="tag" style="background-color: `+cluster.cluster.elements[0].color+`; color:white; font-weight: bold;">`+index+`</span></td>
                     <td>`+cluster.cluster_id+`</td>
                     <td>`+Math.round(cluster.centroid)+`</td>
                     <td>`+cluster.duration+`<img src="style/notes-images/`+cluster.duration+`.PNG" style="height: 20px; margin-left: 20px;"></td>

@@ -72,7 +72,6 @@ class PianoRole{
             let pianoRoleId = this._getPianoRoleId(note);
 
             let NotePow = (Math.pow(pianoRoleIndex, note.octave) + 2);
-            console.log("pow...",NotePow);
 
             let offsetTop = 0;
             if(insertedNotesPOW.indexOf(NotePow) >= 0){
@@ -82,9 +81,8 @@ class PianoRole{
             let offsetPercent = (note.timestampStart - minTimestamp) / (maxTimestamp - minTimestamp);
             let width = note.durationTimestamp * scale;
 
-
             $('.key.key-'+ pianoRoleId +'.octave-'+note.octave+' + .notes').first().append(`
-                <div class="note" style="margin-left: `+offsetLeft+`px; margin-top: -`+offsetTop+`px; width: `+ width +`px;">`+ note.durationTimestamp +`</div>
+                <div class="note" style="background-color: `+note.color+`; margin-left: `+offsetLeft+`px; margin-top: -`+offsetTop+`px; width: `+ width +`px;">`+ note.durationTimestamp +`</div>
             `);
 
             insertedNotesPOW.push(NotePow);
