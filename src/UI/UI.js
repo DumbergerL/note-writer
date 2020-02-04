@@ -47,10 +47,18 @@ $(function(){
         window.PROCESSOR.processNoteDurationDBSCAN();
     });
 
-
     $('#process-kmeans').click( () => {
         window.PROCESSOR.processNoteDurationKMEANS();
     });
+
+    $('#process-e').change( () => {
+        PROCESSOR._e = parseInt( $('#process-e').val() );
+    });
+
+    $('#process-k').change( () => {
+        PROCESSOR._k = parseInt( $('#process-k').val() );
+    });
+    
 
     $('#button-note-play').click( () => {
         $('#button-note-play i').toggleClass('fa-pause');
@@ -62,6 +70,14 @@ $(function(){
             window.PIANO.playRecordDuration(); 
             
         }
+    });
+
+    $('#note-play-tempo').change( () => {
+        window.PIANO._tempo = parseInt( $("#note-play-tempo").val() );
+    });
+
+    $('#button-download').click( () => {
+        PROCESSOR._composition.download('My Symphonie');
     });
 });
 

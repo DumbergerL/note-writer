@@ -6,6 +6,7 @@ class TonePiano{
         this._recordedNotes = [];
         this._piano = null;
         this._initPiano();
+        this._tempo = 120;
     }
 
     _initPiano(){
@@ -99,8 +100,7 @@ class TonePiano{
     playRecordDuration(){
         if(this._recordedNotes.length <= 0)return;
 
-        const BPM = 120;
-        const T_MIDI_STEP = 60 / (BPM * 24);
+        const T_MIDI_STEP = 60 / (this._tempo * 24);
 
         window.TRANSPORT = Tone.Transport;
 

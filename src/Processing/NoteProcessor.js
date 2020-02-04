@@ -13,6 +13,10 @@ class NoteProcessor{
         this._part = new Part('P1').setName('Beethovens Piano');
         this._osmd = OSMD;
 
+
+        this._k = 2;
+        this._e = 200;
+
         this._composition.addPart( this._part );
     }
 
@@ -40,10 +44,9 @@ class NoteProcessor{
 
     processNoteDurationDBSCAN(){
         this.initComposition();
-        let dbscan4 = new DBSCAN( 200 ).setDataset( this._notes ).generateCluster(); 
-        //let dbscan4 = new KMeans(4).setDataset( this._notes ).generateCluster();
+        let dbscan = new DBSCAN( this._e ).setDataset( this._notes ).generateCluster(); 
 
-        let map = dbscan4.getClusterCentroidMap();
+        let map = dbscan.getClusterCentroidMap();
     
         let CLASSIFICATION_80_140 = [
             {type: 'whole',     duration: 96,   upperBound: 3000,   lowerBound: 1710    },
@@ -66,12 +69,12 @@ class NoteProcessor{
             }
         });
 
-        console.log(map);
+        console.log("CLUSTERMAP:",map);
         
         this._notes.sort( (a,b) => {
             return (a.timestampStart - b.timestampStart);
         }).forEach( note => {
-            let clusterId = dbscan4.getClusterIdOfRecord( note );
+            let clusterId = dbscan.getClusterIdOfRecord( note );
             let duration = map.filter( element => element.cluster_id === clusterId)[0].duration;
             note.setDuration( duration);
         });
@@ -101,7 +104,7 @@ class NoteProcessor{
 
     processNoteDurationKMEANS(){
         this.initComposition();
-        let dbscan4 = new KMeans(4).setDataset( this._notes ).generateCluster();
+        let dbscan4 = new KMeans( this._k ).setDataset( this._notes ).generateCluster();
 
         let map = dbscan4.getClusterCentroidMap();
     

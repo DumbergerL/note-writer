@@ -104,22 +104,62 @@
     <div class="container is-fluid">
         <h1 class="title">Process</h1>
 
-        <div class="buttons">
-            <button class="button is-info" id="process-dbscan">DBSCAN</button>
-            <button class="button is-info" id="process-kmeans">K-Means</button>
+        <div class="columns">
+            <div class="column">
+                <div class="field has-addons">
+                    <p class="control">
+                        <span class="button">e:</span>
+                    </p>
+                    <p class="control">
+                        <input class="input" id="process-e" type="number" placeholder="200">
+                    </p>
+                    <p class="control">
+                        <button class="button is-info" id="process-dbscan">DBSCAN</button>
+                    </p>
+                </div>
+            </div>  
+            <div class="column">
+                <div class="field has-addons">
+                    <p class="control">
+                        <span class="button">k:</span>
+                    </p>
+                    <p class="control">
+                        <input class="input" id="process-k" type="number" placeholder="3">
+                    </p>
+                    <p class="control">
+                        <button class="button is-info" id="process-kmeans">K-Means</button>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
     <div id="osmdContainer"></div>
     
     <div class="container is-fluid">
-        <button class="button" id="button-note-play">
+        <div class="field has-addons">
+            <p class="control">
+                <span class="button">Tempo:</span>
+            </p>
+            <p class="control">
+                <input class="input" type="number" value="120" id="note-play-tempo" placeholder="200">
+            </p>
+            <p class="control">
+                <button class="button" id="button-note-play">
+                    <span class="icon is-small">
+                        <i class="fas fa-play"></i>
+                    </span>
+                    <span>Play</span>
+                </button>
+            </p>
+        </div>
+            
+        <button class="button" id="button-download">
             <span class="icon is-small">
-                <i class="fas fa-play"></i>
+                <i class="fas fa-file-download"></i>
             </span>
-            <span>Play</span>
+            <span>Download</span>
         </button>
-    </div>
 
 
 </body>
