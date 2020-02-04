@@ -71,9 +71,13 @@ class PianoRole{
             let pianoRoleIndex = this._getPianoRoleIndex(note);
             let pianoRoleId = this._getPianoRoleId(note);
 
-            let NotePow = Math.pow(pianoRoleIndex, note.octave);
+            let NotePow = (Math.pow(pianoRoleIndex, note.octave) + 2);
+            console.log("pow...",NotePow);
 
-            let offsetTop = (insertedNotesPOW.indexOf(NotePow) > 0 ? 20 : 0);
+            let offsetTop = 0;
+            if(insertedNotesPOW.indexOf(NotePow) >= 0){
+                offsetTop = 20;
+            }
             let offsetLeft = (note.timestampStart - minTimestamp) * scale;
             let offsetPercent = (note.timestampStart - minTimestamp) / (maxTimestamp - minTimestamp);
             let width = note.durationTimestamp * scale;
