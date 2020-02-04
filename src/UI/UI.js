@@ -45,11 +45,29 @@ $(function(){
 
     $('#process-dbscan').click( () => {
         window.PROCESSOR.processNoteDurationDBSCAN();
+        visualizeClusterMap(PROCESSOR._map);
     });
 
     $('#process-kmeans').click( () => {
         window.PROCESSOR.processNoteDurationKMEANS();
+        visualizeClusterMap(PROCESSOR._map);
     });
+
+    function visualizeClusterMap( clusterMap ){
+        $('#cluster-map').show();
+        $('#cluster-map-table-body').empty();
+        clusterMap.forEach((cluster, index) => {
+            $('#cluster-map-table-body').append(`
+                <tr>
+                    <td>`+index+`</td>
+                    <td>`+cluster.cluster_id+`</td>
+                    <td>`+Math.round(cluster.centroid)+`</td>
+                    <td>`+cluster.duration+`<img src="style/notes-images/`+cluster.duration+`.PNG" style="height: 20px; margin-left: 20px;"></td>
+                    <td>`+cluster.cluster.elements.length+`</td>
+                </tr>
+            `);
+        });
+    }
 
     $('#process-e').change( () => {
         PROCESSOR._e = parseInt( $('#process-e').val() );

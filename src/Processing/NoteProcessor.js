@@ -47,14 +47,14 @@ class NoteProcessor{
         this.initComposition();
         let dbscan = new DBSCAN( this._e ).setDataset( this._notes ).generateCluster(); 
 
-        let map = dbscan.getClusterCentroidMap();
+        this._map = dbscan.getClusterCentroidMap();
     
 
-        map.forEach( (clusterMap, index) => {
+        this._map.forEach( (clusterMap, index) => {
             if(index === 0){
                 clusterMap.duration = 12;
             }else{
-                let calculatedDuration = (clusterMap.centroid / map[0].centroid) * 12;
+                let calculatedDuration = (clusterMap.centroid / this._map[0].centroid) * 12;
                 let nearestDuration = 12;
                 this._classificationTimes.forEach( duration => {
                     if(Math.abs(duration-calculatedDuration) < nearestDuration)nearestDuration = duration;
@@ -63,13 +63,13 @@ class NoteProcessor{
             }
         });
 
-        console.log("CLUSTERMAP:",map);
+        console.log(this._map);
         
         this._notes.sort( (a,b) => {
             return (a.timestampStart - b.timestampStart);
         }).forEach( note => {
             let clusterId = dbscan.getClusterIdOfRecord( note );
-            let duration = map.filter( element => element.cluster_id === clusterId)[0].duration;
+            let duration = this._map.filter( element => element.cluster_id === clusterId)[0].duration;
             note.setDuration( duration);
         });
 
@@ -100,13 +100,13 @@ class NoteProcessor{
         this.initComposition();
         let dbscan4 = new KMeans( this._k ).setDataset( this._notes ).generateCluster();
 
-        let map = dbscan4.getClusterCentroidMap();
+        this._map = dbscan4.getClusterCentroidMap();
     
-        map.forEach( (clusterMap, index) => {
+        this._map.forEach( (clusterMap, index) => {
             if(index === 0){
                 clusterMap.duration = 12;
             }else{
-                let calculatedDuration = (clusterMap.centroid / map[0].centroid) * 12;
+                let calculatedDuration = (clusterMap.centroid / this._map[0].centroid) * 12;
                 let nearestDuration = 12;
                 this._classificationTimes.forEach( duration => {
                     if(Math.abs(duration-calculatedDuration) < nearestDuration)nearestDuration = duration;
@@ -115,13 +115,13 @@ class NoteProcessor{
             }
         });
 
-        console.log(map);
+        console.log( this._map);
         
         this._notes.sort( (a,b) => {
             return (a.timestampStart - b.timestampStart);
         }).forEach( note => {
             let clusterId = dbscan4.getClusterIdOfRecord( note );
-            let duration = map.filter( element => element.cluster_id === clusterId)[0].duration;
+            let duration = this._map.filter( element => element.cluster_id === clusterId)[0].duration;
             note.setDuration( duration);
         });
 
