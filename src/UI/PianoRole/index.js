@@ -33,12 +33,12 @@ class PianoRole{
 
         for(let curOctave = fromNote.octave; curOctave <= toNote.octave; curOctave++){
             if(curOctave === fromNote.octave){      //in FROM OCTAVE
-                var startIndex = this._getPianoRoleIndex(fromNote);
+                var startIndex = this._getPianoRoleIndex(fromNote) - 2;
                 for(let index = startIndex; index < PianoRoleIds.length; index++){
                     this._appendKey( curOctave, PianoRoleIds[index]);
                 }                
             }else if(curOctave === toNote.octave){  //in TO OCTAVE
-                var endIndex = this._getPianoRoleIndex(toNote);
+                var endIndex = this._getPianoRoleIndex(toNote) + 2 ;
                 for(let index = 0; index <= endIndex; index++){
                     this._appendKey( curOctave, PianoRoleIds[index]);
                 }
@@ -80,7 +80,7 @@ class PianoRole{
 
 
             $('.key.key-'+ pianoRoleId +'.octave-'+note.octave+' + .notes').first().append(`
-                <div class="note" style="margin-left: `+offsetLeft+`px; margin-top: -`+offsetTop+`px; width: `+ width +`px;"></div>
+                <div class="note" style="margin-left: `+offsetLeft+`px; margin-top: -`+offsetTop+`px; width: `+ width +`px;">`+ note.durationTimestamp +`</div>
             `);
 
             insertedNotesPOW.push(NotePow);
