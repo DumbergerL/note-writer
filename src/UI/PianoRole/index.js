@@ -65,15 +65,25 @@ class PianoRole{
         let noteWorspaceWidth = $('.swimlane .notes').first().width();
         let scale = noteWorspaceWidth / (maxTimestamp - minTimestamp);
         
+        let insertedNotesPOW = [];
+
         noteArray.forEach( note => {
+            let pianoRoleIndex = this._getPianoRoleIndex(note);
             let pianoRoleId = this._getPianoRoleId(note);
-            let offset = (note.timestampStart - minTimestamp) * scale;
+
+            let NotePow = Math.pow(pianoRoleIndex, note.octave);
+
+            let offsetTop = (insertedNotesPOW.indexOf(NotePow) > 0 ? 20 : 0);
+            let offsetLeft = (note.timestampStart - minTimestamp) * scale;
             let offsetPercent = (note.timestampStart - minTimestamp) / (maxTimestamp - minTimestamp);
             let width = note.durationTimestamp * scale;
 
+
             $('.key.key-'+ pianoRoleId +'.octave-'+note.octave+' + .notes').first().append(`
-                <div class="note" style="margin-left: `+offset+`px; width: `+ width +`px;"></div>
+                <div class="note" style="margin-left: `+offsetLeft+`px; margin-top: -`+offsetTop+`px; width: `+ width +`px;"></div>
             `);
+
+            insertedNotesPOW.push(NotePow);
         });     
     }
 
@@ -117,7 +127,7 @@ window.PIANO_ROLE = new PianoRole('#piano-role-1');
     (new Note().setStep('A').setOctave(6))
 );*/
 
-var array = [
+/*var array = [
     (new Note().setStep('C').setOctave(4).setAlter(0).setTimestampStart(2000).setTimestampEnd(2100)),
     (new Note().setStep('D').setOctave(4).setAlter(-1).setTimestampStart(2200).setTimestampEnd(2300)),
     (new Note().setStep('E').setOctave(4).setAlter(0).setTimestampStart(2400).setTimestampEnd(2500)),
@@ -125,6 +135,6 @@ var array = [
     (new Note().setStep('G').setOctave(4).setAlter(0).setTimestampStart(2800).setTimestampEnd(3000)),
     (new Note().setStep('A').setOctave(4).setAlter(-1).setTimestampStart(2900).setTimestampEnd(3000)),
     (new Note().setStep('B').setOctave(4).setAlter(0).setTimestampStart(3000).setTimestampEnd(3500))    
-]
+]*/
 
-PIANO_ROLE.visualizeNotes(array);
+//PIANO_ROLE.visualizeNotes(array);

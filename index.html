@@ -14,7 +14,7 @@
         
     </style>
 </head>
-<body>
+<body style="background-color: #2f152f33">
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item">
@@ -44,10 +44,10 @@
           </div>
     </nav>
 
-    <div class="container is-fluid">
+    <div class="container is-fluid" style="margin-top: 2rem;">
         <div class="field has-addons">
             <p class="control">
-                <button class="button is-large" id="button-record">
+                <button class="button" id="button-record">
                 <span class="icon is-small">
                     <i class="fas fa-compact-disc"></i>
                 </span>
@@ -55,7 +55,7 @@
                 </button>
             </p>
             <p class="control">
-                <button class="button is-large" id="button-play">
+                <button class="button" id="button-play">
                 <span class="icon is-small">
                     <i class="fas fa-play"></i>
                 </span>
@@ -63,7 +63,7 @@
                 </button>
             </p>
             <p class="control">
-                <button class="button is-large" id="button-clear">
+                <button class="button" id="button-clear">
                 <span class="icon is-small">
                     <i class="fas fa-trash"></i>
                 </span>
@@ -72,8 +72,6 @@
             </p>
         </div>
     </div>
-
-
     <div class="container is-fluid">
         <div class="piano-role" id="piano-role-1">
             <div class="workbench">
@@ -101,66 +99,79 @@
         </div>
     </div>    
 
-    <div class="container is-fluid">
-        <h1 class="title">Process</h1>
-
+    <div class="container is-fluid" style="margin-top: 2rem;">
         <div class="columns">
-            <div class="column">
-                <div class="field has-addons">
-                    <p class="control">
-                        <span class="button">e:</span>
-                    </p>
-                    <p class="control">
-                        <input class="input" id="process-e" type="number" placeholder="200">
-                    </p>
-                    <p class="control">
-                        <button class="button is-info" id="process-dbscan">DBSCAN</button>
-                    </p>
-                </div>
-            </div>  
-            <div class="column">
-                <div class="field has-addons">
-                    <p class="control">
-                        <span class="button">k:</span>
-                    </p>
-                    <p class="control">
-                        <input class="input" id="process-k" type="number" placeholder="3">
-                    </p>
-                    <p class="control">
-                        <button class="button is-info" id="process-kmeans">K-Means</button>
-                    </p>
+           <div class="column">
+                <div class="box">
+                    <h3 class="title is-3">K-Means - Clustering</h3>
+                    <div class="field has-addons">
+                        <p class="control">
+                            <span class="button">k:</span>
+                        </p>
+                        <p class="control">
+                            <input class="input" id="process-k" value="2" type="number" placeholder="3">
+                        </p>
+                        <p class="control">
+                            <button class="button is-info" id="process-kmeans">K-Means</button>
+                        </p>
+                    </div>
                 </div>
             </div>
+            <div class="column">
+                <div class="box">
+                    <h3 class="title is-3">DBSCAN - Clustering</h3>
+                    <div class="field has-addons">
+                        <p class="control">
+                            <span class="button">e:</span>
+                        </p>
+                        <p class="control">
+                            <input class="input" id="process-e" value="200" type="number" placeholder="200">
+                        </p>
+                        <p class="control">
+                            <button class="button is-info" id="process-dbscan">DBSCAN</button>
+                        </p>
+                    </div>
+                </div>
+            </div>  
         </div>
     </div>
 
-    <div id="osmdContainer"></div>
-    
-    <div class="container is-fluid">
-        <div class="field has-addons">
-            <p class="control">
-                <span class="button">Tempo:</span>
-            </p>
-            <p class="control">
-                <input class="input" type="number" value="120" id="note-play-tempo" placeholder="200">
-            </p>
-            <p class="control">
-                <button class="button" id="button-note-play">
-                    <span class="icon is-small">
-                        <i class="fas fa-play"></i>
-                    </span>
-                    <span>Play</span>
-                </button>
-            </p>
+    <div class="container is-fluid" style="margin-top: 2rem;">
+        <div class="card">
+            <div class="card-content">
+                <div id="osmdContainer" style="margin-bottom: 5rem;"></div>  
+            </div>
+            <div class="card-footer">
+                <span class="card-footer-item">
+                    <div class="field has-addons">
+                        <p class="control">
+                            <span class="button">Tempo:</span>
+                        </p>
+                        <p class="control">
+                            <input class="input" type="number" value="120" id="note-play-tempo" placeholder="200">
+                        </p>
+                        <p class="control">
+                            <button class="button" id="button-note-play">
+                                <span class="icon is-small">
+                                    <i class="fas fa-play"></i>
+                                </span>
+                                <span>Play</span>
+                            </button>
+                        </p>
+                    </div>
+                </span>
+                <span class="card-footer-item">
+                    <button class="button" id="button-download">
+                        <span class="icon is-small">
+                            <i class="fas fa-file-download"></i>
+                        </span>
+                        <span>Download</span>
+                    </button>
+                </span>
+            </div>
         </div>
-            
-        <button class="button" id="button-download">
-            <span class="icon is-small">
-                <i class="fas fa-file-download"></i>
-            </span>
-            <span>Download</span>
-        </button>
-
+    </div>
+    
 
 </body>
 <script src="node_modules/opensheetmusicdisplay/build/opensheetmusicdisplay.min.js"></script>

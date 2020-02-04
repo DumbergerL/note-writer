@@ -17,6 +17,7 @@ class NoteProcessor{
         this._k = 2;
         this._e = 200;
 
+        this._classificationTimes = [6,12,24,48,96];
         this._composition.addPart( this._part );
     }
 
@@ -48,13 +49,6 @@ class NoteProcessor{
 
         let map = dbscan.getClusterCentroidMap();
     
-        let CLASSIFICATION_80_140 = [
-            {type: 'whole',     duration: 96,   upperBound: 3000,   lowerBound: 1710    },
-            {type: 'half',      duration: 48,   upperBound: 1500,   lowerBound: 860     },
-            {type: 'quarter',   duration: 24,   upperBound: 750,    lowerBound: 430     },
-            {type: 'eighth',    duration: 12,   upperBound: 380,    lowerBound: 210     },
-            {type: '16th',      duration: 6,    upperBound: 190,    lowerBound: 110     }
-        ];
 
         map.forEach( (clusterMap, index) => {
             if(index === 0){
@@ -62,7 +56,7 @@ class NoteProcessor{
             }else{
                 let calculatedDuration = (clusterMap.centroid / map[0].centroid) * 12;
                 let nearestDuration = 12;
-                [6,12,24,48,96].forEach( duration => {
+                this._classificationTimes.forEach( duration => {
                     if(Math.abs(duration-calculatedDuration) < nearestDuration)nearestDuration = duration;
                 });
                 clusterMap.duration = nearestDuration;
@@ -108,21 +102,13 @@ class NoteProcessor{
 
         let map = dbscan4.getClusterCentroidMap();
     
-        let CLASSIFICATION_80_140 = [
-            {type: 'whole',     duration: 96,   upperBound: 3000,   lowerBound: 1710    },
-            {type: 'half',      duration: 48,   upperBound: 1500,   lowerBound: 860     },
-            {type: 'quarter',   duration: 24,   upperBound: 750,    lowerBound: 430     },
-            {type: 'eighth',    duration: 12,   upperBound: 380,    lowerBound: 210     },
-            {type: '16th',      duration: 6,    upperBound: 190,    lowerBound: 110     }
-        ];
-
         map.forEach( (clusterMap, index) => {
             if(index === 0){
                 clusterMap.duration = 12;
             }else{
                 let calculatedDuration = (clusterMap.centroid / map[0].centroid) * 12;
                 let nearestDuration = 12;
-                [6,12,24,48,96].forEach( duration => {
+                this._classificationTimes.forEach( duration => {
                     if(Math.abs(duration-calculatedDuration) < nearestDuration)nearestDuration = duration;
                 });
                 clusterMap.duration = nearestDuration;
