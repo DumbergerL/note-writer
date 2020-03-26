@@ -1,13 +1,11 @@
 # MIDI Piano Trainer
 
-## Basic Structure
+## Online Demo (only Google Chrome)
 
-- MIDIController (controlls communication with midi-board and events)
-- MIDISong (represents a song [maybe parsed from MusicXML] to be played from the Piano - can also be played on piano)
-- MusicXMLParser (parses the MusicXML Files)
-- 
+https://notewriter.lukasdumberger.de
 
-## JavaScript Global Objekt / Divisions
+
+## JavaScript Distribution
 
 | Source File | Dist File | Global Objects |
 | ----------- | --------- | -------------- |
@@ -17,4 +15,4 @@
 
 
 ## License
-Note-Writer was written by Lukas Dumberger (https://dumbergerl.de). The Software is under MIT-License. The Piano Sound is made by [Alexander Holm](https://github.com/Tonejs/Tone.js/tree/dev/examples/audio/salamander) and are published under [CC-License](./audio/salamander/README).
+Note-Writer was written by Lukas Dumberger (https://dumbergerl.de). The Software is under MIT-License. The Piano Sound are made by [Alexander Holm](https://github.com/Tonejs/Tone.js/tree/dev/examples/audio/salamander) and are published [CC-License](./audio/salamander/README).
