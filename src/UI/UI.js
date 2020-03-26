@@ -56,7 +56,6 @@ $(function(){
     });
 
     function visualizeClusterMap( clusterMap ){
-        console.log("THE CLUSTERMAP:", clusterMap);
         $('#cluster-map').show();
         $('#cluster-map-table-body').empty();
         clusterMap.forEach((cluster, index) => {

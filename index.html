@@ -3,7 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Piano Trainer</title>
+    <title>Note Writer</title>
     <link rel='icon' href='favicon.ico' type='image/x-icon'/ >
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="./style/fontawesome-free-5.11.2-web/css/all.min.css">
@@ -17,7 +17,7 @@
 <body style="background-color: #2f152f33; min-height: 100vh;">
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item">
+            <a class="navbar-item" href="./index.html">
                 <img src="./logo.png" width="162">
             </a>
         
@@ -29,6 +29,9 @@
         </div>
         
         <div class="navbar-end">
+            <div class="navbar-item">
+                <a href="./manual.html">Manual</a>
+            </div>
             <div class="navbar-item">
               <div class="field is-grouped">
                 <p class="control">
@@ -143,10 +146,10 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Cluster Name</th>
-                        <th>Cluster Zentroid</th>
-                        <th>Notenlänge</th>
-                        <th>Anzahl Elemente</th>
+                        <th>Cluster name</th>
+                        <th>Cluster centroid</th>
+                        <th>Note type</th>
+                        <th>Number of elements</th>
                     </tr>
                 </thead>
                 <tbody id="cluster-map-table-body">
@@ -191,7 +194,19 @@
         </div>
     </div>
     
-
+    <footer class="footer" style="margin-top: 5rem; padding-bottom: 3rem;">
+        <div class="content has-text-centered">
+            <p>
+                <a href="./manual.html">Docs</a> |
+                <a href="https://dumbergerl.de/#imprint">Imprint</a> |
+                <a href="https://github.com/DumbergerL/note-writer">GitHub</a>
+                
+            </p>
+            <p>
+                &copy; <strong>Note Writer</strong> 2020 by <a href="https://dumbergerl.de">Lukas Dumberger</a>.
+            </p>
+        </div>
+    </footer>
 </body>
 <script src="node_modules/opensheetmusicdisplay/build/opensheetmusicdisplay.min.js"></script>
 <script src='dist/note-writer.js'></script>
