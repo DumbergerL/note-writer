@@ -15,6 +15,19 @@
     </style>
 </head>
 <body style="background-color: #2f152f33; min-height: 100vh;">
+    
+    <div id="modal-import-export-background" style="display: none; overflow-y: none; position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; background-color: black; opacity: 0.5; z-index: 400;"></div>
+    <article class="message is-primary" id="modal-import-export" style="display: none; position: absolute; z-index: 500; width: 600px; left: calc(50vw - 300px); top: 100px;">
+        
+        <div class="message-header">
+          <p>Import / Export</p>
+          <button class="delete" aria-label="delete" id="modal-import-export-dismiss"></button>
+        </div>
+        <div class="message-body">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.
+        </div>
+    </article>
+        
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="./index.html">
@@ -30,7 +43,16 @@
         
         <div class="navbar-end">
             <div class="navbar-item">
-                <a href="./manual.html">Manual</a>
+                <div class="field is-grouped">
+                    <p class="control">
+                        <a id="button-import-export" class="button ">
+                        <span>Import/Export</span>
+                        <span class="icon is-small">
+                            <i class="fas fa-upload"></i>
+                        </span>
+                        </a>
+                    </p>
+                </div>
             </div>
             <div class="navbar-item">
               <div class="field is-grouped">

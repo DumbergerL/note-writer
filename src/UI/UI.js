@@ -7,6 +7,19 @@ $(function(){
         $('#status-button').removeClass('is-loading');
     }, 1500);
 
+    $('#button-import-export').click( () => {
+        $('#modal-import-export-background').show();
+        $('#modal-import-export').show();
+        
+    });
+
+
+    $('#modal-import-export-dismiss, #modal-import-export-background').click( () => {
+        $('#modal-import-export-background').hide();
+        $('#modal-import-export').hide();
+
+    });
+
     $('#button-record').click( () => {
         $('#button-record').toggleClass('is-danger');
         $('#button-record').toggleClass('glow');
