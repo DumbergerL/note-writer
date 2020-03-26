@@ -56,12 +56,14 @@ $(function(){
     });
 
     function visualizeClusterMap( clusterMap ){
+        console.log("THE CLUSTERMAP:", clusterMap);
         $('#cluster-map').show();
         $('#cluster-map-table-body').empty();
         clusterMap.forEach((cluster, index) => {
+            if(cluster.cluster.elements.length <= 0 )return; //cluster has no Elements
             $('#cluster-map-table-body').append(`
                 <tr>
-                    <td><span class="tag" style="background-color: `+cluster.cluster.elements[0].color+`; color:white; font-weight: bold;">`+index+`</span></td>
+                    <td><span class="tag" style="background-color: `+ cluster.cluster.elements[0].color +`; color:white; font-weight: bold;">`+index+`</span></td>
                     <td>`+cluster.cluster_id+`</td>
                     <td>`+Math.round(cluster.centroid)+`</td>
                     <td>`+cluster.duration+`<img src="style/notes-images/`+cluster.duration+`.PNG" style="height: 20px; margin-left: 20px;"></td>
