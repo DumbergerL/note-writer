@@ -4,8 +4,12 @@ const Note = require('../Utils/Note');
 $(function(){
     
     setTimeout( () => {
-        $('#status-button-title').text(''+STREAM._midiController.output.name);
-        $('#status-button').removeClass('is-loading');
+        try{
+            $('#status-button-title').text(''+STREAM._midiController.output.name);
+            $('#status-button').removeClass('is-loading');
+        }catch(e){
+            console.log(e);
+        }
     }, 1500);
 
     $('#button-import-export').click( () => {

@@ -43,28 +43,34 @@ class NoteProcessor{
         return this;
     }
 
-    processNoteDurationDBSCAN(){
-        this.initComposition();
-        let dbscan = new DBSCAN( this._e ).setDataset( this._notes ).generateCluster(); 
-
-        this._map = dbscan.getClusterCentroidMap();
-    
-
+    classifyClusterMap(){
         this._map.forEach( (clusterMap, index) => {
             if(index === 0){
                 clusterMap.duration = 12;
             }else{
                 let calculatedDuration = (clusterMap.centroid / this._map[0].centroid) * 12;
                 let nearestDuration = 12;
+                let minDistance = Infinity;
                 this._classificationTimes.forEach( duration => {
-                    if(Math.abs(duration-calculatedDuration) < nearestDuration)nearestDuration = duration;
+                    var distance = Math.abs(duration - calculatedDuration);
+                    if(distance < minDistance){
+                        nearestDuration = duration;
+                        minDistance = distance;
+                    }
                 });
                 clusterMap.duration = nearestDuration;
             }
         });
+    }
 
-        console.log(this._map);
-        
+    processNoteDurationDBSCAN(){
+        this.initComposition();
+        let dbscan = new DBSCAN( this._e ).setDataset( this._notes ).generateCluster(); 
+
+        this._map = dbscan.getClusterCentroidMap();
+    
+        this.classifyClusterMap();
+
         this._notes.sort( (a,b) => {
             return (a.timestampStart - b.timestampStart);
         }).forEach( note => {
@@ -102,21 +108,8 @@ class NoteProcessor{
 
         this._map = dbscan4.getClusterCentroidMap();
     
-        this._map.forEach( (clusterMap, index) => {
-            if(index === 0){
-                clusterMap.duration = 12;
-            }else{
-                let calculatedDuration = (clusterMap.centroid / this._map[0].centroid) * 12;
-                let nearestDuration = 12;
-                this._classificationTimes.forEach( duration => {
-                    if(Math.abs(duration-calculatedDuration) < nearestDuration)nearestDuration = duration;
-                });
-                clusterMap.duration = nearestDuration;
-            }
-        });
+        this.classifyClusterMap();
 
-        console.log( this._map);
-        
         this._notes.sort( (a,b) => {
             return (a.timestampStart - b.timestampStart);
         }).forEach( note => {
