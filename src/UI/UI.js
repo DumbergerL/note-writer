@@ -34,12 +34,19 @@ $(function(){
         downloadAnchorNode.remove();
     });
 
-    $('#button-import-json').click( () => {
+
+    function importJSON( jsonText )
+    {
         let importObject = [];
         let noteArray = [];
 
+        window.PROCESSOR.clearNotes();
+        window.PROCESSOR.initComposition();
+        window.PIANO_ROLE.clearNotes();
+        window.PIANO.clearRecord();
+
         try{
-            let text = $('#textarea-import-json').val();
+            let text = jsonText;
             importObject = JSON.parse( text );
         }catch(e){
             console.log(e);
@@ -61,7 +68,17 @@ $(function(){
         });      
 
         window.PIANO_ROLE.visualizeNotes( noteArray );
+    }
+
+    $('#button-import-json').click( () => {
+        importJSON( $('#textarea-import-json').val() );
     });
+
+    $('.preset-button').click( (e) => {
+        let presetId = $(e.target).attr('presetId');
+        importJSON( $('#preset-json-'+presetId).val() );
+    });
+
 
     $('#button-record').click( () => {
         $('#button-record').toggleClass('is-danger');
