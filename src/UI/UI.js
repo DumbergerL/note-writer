@@ -1,4 +1,5 @@
 const $ = require('jquery');
+const Note = require('../Utils/Note');
 
 $(function(){
     
@@ -6,6 +7,78 @@ $(function(){
         $('#status-button-title').text(''+STREAM._midiController.output.name);
         $('#status-button').removeClass('is-loading');
     }, 1500);
+
+    $('#button-import-export').click( () => {
+        $('#modal-import-export-background').show();
+        $('#modal-import-export').show(); 
+    });
+
+    $('#modal-import-export-dismiss, #modal-import-export-background').click( () => {
+        $('#modal-import-export-background').hide();
+        $('#modal-import-export').hide();
+    });
+
+    $('#button-export-json').click( () => {
+        let exportObject = [];
+
+        window.PROCESSOR.notes.forEach( note => {
+            exportObject.push( note.toJSON() )
+        });
+        
+        var dataStr = "data:json;charset=utf-8," + encodeURIComponent( JSON.stringify( exportObject ) );
+        var downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute("href",     dataStr);
+        downloadAnchorNode.setAttribute("download", "note-writer-export.json");
+        document.body.appendChild(downloadAnchorNode); // required for firefox
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
+    });
+
+
+    function importJSON( jsonText )
+    {
+        let importObject = [];
+        let noteArray = [];
+
+        window.PROCESSOR.clearNotes();
+        window.PROCESSOR.initComposition();
+        window.PIANO_ROLE.clearNotes();
+        window.PIANO.clearRecord();
+
+        try{
+            let text = jsonText;
+            importObject = JSON.parse( text );
+        }catch(e){
+            console.log(e);
+            alert("Error im Import!");
+        }
+
+        importObject.forEach( noteData => {
+            var note = new Note();
+            if(noteData.hasOwnProperty('step'))note.setStep( noteData.step );
+            if(noteData.hasOwnProperty('octave'))note.setOctave( noteData.octave );
+            if(noteData.hasOwnProperty('alter') && noteData.alter != null)note.setAlter(noteData.alter);
+            if(noteData.hasOwnProperty('duration') && noteData.duration != null)note.setDuration(noteData.duration);
+            if(noteData.hasOwnProperty('timestampStart'))note.setTimestampStart( noteData.timestampStart);
+            if(noteData.hasOwnProperty('timestampEnd'))note.setTimestampEnd(noteData.timestampEnd);
+            if(noteData.hasOwnProperty('velocity'))note.setVelocity(noteData.velocity);
+            noteArray.push( note );
+            window.PIANO.addNote( note );
+            window.PROCESSOR.pushNote( note );
+        });      
+
+        window.PIANO_ROLE.visualizeNotes( noteArray );
+    }
+
+    $('#button-import-json').click( () => {
+        importJSON( $('#textarea-import-json').val() );
+    });
+
+    $('.preset-button').click( (e) => {
+        let presetId = $(e.target).attr('presetId');
+        importJSON( $('#preset-json-'+presetId).val() );
+    });
+
 
     $('#button-record').click( () => {
         $('#button-record').toggleClass('is-danger');

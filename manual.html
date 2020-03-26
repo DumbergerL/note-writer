@@ -55,8 +55,16 @@
                 </ul>
             </p>
             <p>
-                Schließe das MIDI-Keyboard an deinen Computer an. Um die Anwendung zu starten, wird der Google Chrome Browser benötigt. In der Navigationsleiste kann dann die URL <a href="https://notewriter.lukasdumberger.de">https://notewriter.lukasdumberger.de</a> geöffnet werden. Wenn alles geklappt hat siehst du im rechten oberen Eck den Namen deines MIDI-Keyboards.
+                Schließe das MIDI-Keyboard an deinen Computer an. Um die Anwendung zu starten, wird der Google Chrome Browser benötigt. In der Navigationsleiste kann dann die URL <a href="https://notewriter.lukasdumberger.de">https://notewriter.lukasdumberger.de</a> geöffnet werden. Wenn alles geklappt hat siehst du im rechten oberen Eck den Namen deines MIDI-Keyboards. Sollte nach einigen Sekunden die Ladeanimation nicht verschwunden sein, lade die Seite im Browser neu.
             </p>
+            <br>
+            <article class="message is-success">
+                <div class="message-body">
+                  <p>
+                      Es stehen dir auch verschiedene Musikstücke als <a href="#presets">Presets</a> zur Verfügung, solltest du gerade kein MIDI-Keyboard zur Hand haben oder selbst keine Noten lesen können.
+                  </p>
+                </div>
+              </article>
         </div>
     </div>
 
@@ -114,6 +122,36 @@
                 Um die generierten Noten in deinem Notenschreibprogramm weiterverwenden zu können, kannst du die Noten über den Button "Download MusicXML" herunterladen.
             </p>
             
+        </div>
+    </div>
+
+    <div class="container is-fluid" id="cluster-map" style="margin-top: 2rem;">
+        <div class="box">
+            <h3 class="title is-3">Daten Import/Exports und Presets laden:</h3>
+            <p>
+                <ul>
+                    <li>1. Daten Exportieren</li>
+                </ul>
+            </p>
+            <p>
+                Die "Rohdaten" des aufgenommenen Musikstücks können in JSON Format exportiert werden. Dazu in der Menü-Leiste auf den Button "Import/Export" klicken. Anschließend im Popupfenster auf den Button "Export notes (JSON)".
+            </p>
+            <p>
+                <ul>
+                    <li>2. Daten Importieren</li>
+                </ul>
+            </p>
+            <p>
+                Es lassen sich auch bereits exportierte Daten wieder in die Software importieren. Hierfür über "Import/Export" das Popupfenster öffen, die Daten in das Textfeld "Notes in JSON Format" einfügen und über "Import notes (JSON)" bestätigen. Die Noten werden dann auf der Piano-Role angezeigt.
+            </p>
+            <p>
+                <ul>
+                    <li id="presets">3. Presets laden</li>
+                </ul>
+            </p>
+            <p>
+                Es stehen auch einige bekannte Melodiestücke zur Verfügung, die geladen werden können. Im "Import/Export" Popupfenster befinden sich im unteren Teil einige Titel. Durch klick auf einen dieser Musikstücke, werden die Noten geladen.
+            </p>
         </div>
     </div>
 
