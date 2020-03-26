@@ -148,6 +148,7 @@ class Note extends MusicXMLParser{
     }
 
     static validate( note ){
+        return true;
         if(!(note instanceof Note))throw "Parameter given in must be type of Note!";
         return true;
     }

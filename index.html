@@ -24,7 +24,36 @@
           <button class="delete" aria-label="delete" id="modal-import-export-dismiss"></button>
         </div>
         <div class="message-body">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.
+            <h5 class="subtitle is-5">Export:</h5>
+            <div class="field is-grouped">
+                <p class="control">
+                    <a class="button" id="button-export-json">
+                    <span>Export notes (JSON)</span>
+                    <span class="icon is-small">
+                        <i class="fas fa-download"></i>
+                    </span>
+                    </a>
+                </p>
+            </div>
+
+            <h5 class="subtitle is-5">Import:</h5>
+            <div class="field">
+                <p class="control">
+                    <textarea id="textarea-import-json" class="textarea is-primary" placeholder="Notes in JSON Format"></textarea>
+                </p>
+            </div>
+            <div class="field is-grouped">
+                <p class="control">
+                    <a class="button" id="button-import-json">
+                    <span>Import notes (JSON)</span>
+                    <span class="icon is-small">
+                        <i class="fas fa-upload"></i>
+                    </span>
+                    </a>
+                </p>
+            </div>
+
+            
         </div>
     </article>
         
