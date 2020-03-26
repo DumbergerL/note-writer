@@ -65,7 +65,7 @@ $(function(){
                 <tr>
                     <td><span class="tag" style="background-color: `+ cluster.cluster.elements[0].color +`; color:white; font-weight: bold;">`+index+`</span></td>
                     <td>`+cluster.cluster_id+`</td>
-                    <td>`+Math.round(cluster.centroid)+`</td>
+                    <td>`+Math.round(cluster.centroid)+` ms</td>
                     <td>`+cluster.duration+`<img src="style/notes-images/`+cluster.duration+`.PNG" style="height: 20px; margin-left: 20px;"></td>
                     <td>`+cluster.cluster.elements.length+`</td>
                 </tr>
