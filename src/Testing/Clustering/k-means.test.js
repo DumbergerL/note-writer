@@ -1,4 +1,4 @@
-const kMeans = require('./k-means');
+const kMeans = require('../../Processing/Clustering/k-means');
 const Note = require('../../Utils/Note');
 
 let theCluster = new kMeans(2);

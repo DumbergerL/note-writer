@@ -1,4 +1,4 @@
-const ClusterAlgorithm = require('./ClusterAlgorithm');
+const ClusterAlgorithm = require('../../Processing/Clustering/ClusterAlgorithm');
 const Note = require('../../Utils/Note');
 
 var clusterAlgorithm = new ClusterAlgorithm();
