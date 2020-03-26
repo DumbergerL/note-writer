@@ -1,4 +1,4 @@
-const NoteStream = require('./NoteStream');
+const NoteStream = require('../Utils/NoteStream');
 const MidiController = require('../MIDI/MIDIController');
 
 var noteStream = new NoteStream(new MidiController());

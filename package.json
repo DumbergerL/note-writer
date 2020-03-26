@@ -8,6 +8,7 @@
     "dev-start": "webpack-dev-server --open",
     "test": "jest",
     "test-coverage": "jest --coverage",
+    "test-clear-cache": "jest --clearCache",
     "serve": "php -S localhost:8000"
   },
   "author": "Lukas Dumberger",

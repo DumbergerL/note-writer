@@ -1,5 +1,5 @@
-const Measure = require('./Measure');
-const Note = require('../../Utils/Note');
+const Measure = require('../MusicXML/CompositionElements/Measure');
+const Note = require('../Utils/Note');
 
 var measure = new Measure(1);
 

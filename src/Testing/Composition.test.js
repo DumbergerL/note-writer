@@ -1,4 +1,4 @@
-const {Composition, Part, Measure} = require('./Composition');
+const {Composition, Part, Measure} = require('../MusicXML/Composition');
 
 
 /////////////////////////COMPOSITION/////////////////////////////////////////

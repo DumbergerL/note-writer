@@ -1,4 +1,4 @@
-const DBSCAN = require('./dbscan');
+const DBSCAN = require('../../Processing/Clustering/dbscan');
 const Note = require('../../Utils/Note');
 
 let dbscan = new DBSCAN();

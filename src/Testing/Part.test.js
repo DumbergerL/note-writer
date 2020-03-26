@@ -1,6 +1,6 @@
-const Part = require('./Part');
-const Measure = require('./Measure');
-const Note = require('../../Utils/Note');
+const Part = require('../MusicXML/CompositionElements/Part');
+const Measure = require('../MusicXML/CompositionElements/Measure');
+const Note = require('../Utils/Note');
 
 /////////////////////////PART//////////////////////////////////////////////////
 var part = new Part(1);

@@ -1,4 +1,4 @@
-const {Cluster} = require('./Utils');
+const {Cluster} = require('../../Processing/Clustering/Utils');
 const Note = require('../../Utils/Note');
 
 var cluster = new Cluster();
