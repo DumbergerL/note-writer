@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Note Writer</title>
+    <link rel='icon' href='favicon.ico' type='image/x-icon'/ >
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="./style/fontawesome-free-5.11.2-web/css/all.min.css">
+    <link rel="stylesheet" href="./style/bulma.min.css">
+    <style>
+        ul{
+            margin: 1.5rem 0 0.5rem 1rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body style="background-color: #2f152f33; min-height: 100vh;">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item">
+                <img src="./logo.png" width="162">
+            </a>
+        
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container is-fluid" id="cluster-map" style="margin-top: 2rem;">
+        <div class="box">
+            <h3 class="title is-3">Die Vorbereitung:</h3>
+            <p>
+                <ul>
+                    <li>1. Installiere den <a href="https://www.google.com/chrome/">Google Chrome Browser</a></li>
+                </ul>
+            </p>
+            <p>
+                <a href="">Note-Writer</a> ist eine Browserbasierte Web-Anwendung. Die Anwendung macht sich die durch die W3C definierte <a href="https://www.w3.org/TR/webmidi/">Web MIDI API</a> zunutze. Diese Web MIDI API wird momentan (Stand März 2020) nicht in allen Browsern unterstützt. Der Google Chrome Browser unterstützt diese API, deshalb ist die <a href="https://www.google.com/chrome/">Installation Vorraussetzung</a>. 
+            </p>
+            <p>
+                <ul>
+                    <li>2. Installiere den MIDI-Keyboard Treiber</li>
+                </ul>
+            </p>
+            <p>
+                Damit der Browser auf den vollen Funktionsumfang des MIDI-Keyboards zugreifen kann, müssen die für das Betriebssystem notwendigen Treiber installiert sein. Für das <a href="https://www.akaipro.com/mpk-mini">AKAI MPK mini</a> stellt der Hersteller die notwendigen Treiber auf seiner Homepage zur verfügung. Schließe das MIDI-Keyboard an den Computer an und starte die Installation des Treibers. 
+            </p>
+            <p>
+                <ul>
+                    <li>3. Öffne die <a href="https://notewriter.lukasdumberger.de">Anwendung</a> im Google Chrome Browser</li>
+                </ul>
+            </p>
+            <p>
+                Schließe das MIDI-Keyboard an deinen Computer an. Um die Anwendung zu starten, wird der Google Chrome Browser benötigt. In der Navigationsleiste kann dann die URL <a href="https://notewriter.lukasdumberger.de">https://notewriter.lukasdumberger.de</a> geöffnet werden. Wenn alles geklappt hat siehst du im rechten oberen Eck den Namen deines MIDI-Keyboards.
+            </p>
+        </div>
+    </div>
+
+    <div class="container is-fluid" id="cluster-map" style="margin-top: 2rem;">
+        <div class="box">
+            <h3 class="title is-3">Note-Writer benutzen:</h3>
+            <p>
+                <ul>
+                    <li>1. Klavierstück aufnehmen (Record)</li>
+                </ul>
+            </p>
+            <p>
+                Um ein Klavierstück aufzunehmen, klicke auf den "Record"-Button. Du wirst merken, dass er beginnt rot zu leuchten. Du befindest dich im Aufnahmemodus. Nun kannst du auf dem MIDI-Keyboard das Klavierstück spielen. Sobald du fertig bist, drücke erneut auf den "Record"-Button um den Aufnahmemodus zu verlassen. Die gespielten Noten werden dir auf der Piano-Role angezeigt. Die Zahl in der Mitte der Note ist die Notenlänge in Millisekunden. 
+            </p>
+            <p>
+                <ul>
+                    <li>2. Die Aufnahme wiedergeben (Play)</li>
+                </ul>
+            </p>
+            <p>
+                Das eben aufgenommene Klavierstück kannst du dir abspielen lassen indem du auf den "Play"-Button klickst. Nun solltest du die Melodie deines Klavierstücks hören. Vergiss nicht die Lautsprecher anzuschalten. Du kannst das abspielen der Melodie durch erneutes klicken auch pausieren.
+            </p>
+            <p>
+                <ul>
+                    <li>3. Die Aufnahme löschen (Clear)</li>
+                </ul>
+            </p>
+            <p>
+                Durch einen Klick auf den "Clear"-Button wird die Aufnahme unwiederuflich gelöscht. Danach musst du eine neue Aufnahme beginnen.
+            </p>
+            <p>
+                <ul>
+                    <li>3. Die Notenwerte bestimmen (Clustering)</li>
+                </ul>
+            </p>
+            <p>
+                Es stehen dir zwei Clustering-Methoden (k-Means, DBSCAN) zur Verfügung mit denen du die Notenwerte bestimmen kannst. Über den Klick auf den blauen Button werden die Notenwerte bestimmt (genaueres zum Clustering siehe unten). Sobald das Clustering beendet ist, wirst du feststellen, dass dir die <b>Cluster-Maps</b> angezeigt werden. Die Cluster-Map ist eine tabellarische Auflistung aller Cluster. Der "Cluster name" ist der Name des Clusters, dieser wird zufällig generiert. Unter "Cluster centroid" wird der Mittelwert aller Notenlängen berechnet. Der "Note type" gibt an welcher Notenwert der Cluster hat. Die Zahl ist der Notenwert laut MIDI-Spezifikation (24 divisions per quarter), daneben wird die Note angezeigt die gemeint ist. Die Spalte "Number of elements" gibt an, wieviele Noten dieser Cluster enthält.
+                Die in der <b>Piano-Role</b> visualisierten Noten haben ihre Farbe geändert um anzuzeigen zu welchem Cluster sie gehören.
+                Im Unteren Bereich wurden die <b>Noten</b> für das Klavierstück erzeugt. 
+            </p>
+            <p>
+                <ul>
+                    <li>4. Die generierten Noten abspielen (Play)</li>
+                </ul>
+            </p>
+            <p>
+                Die generierten Noten kannst du dir abspielen lassen indem du unterhalb der Noten auf den "Play"-Button klickst. Nun solltest du die dargestellten Noten hören. Du kannst das abspielen der Melodie durch erneutes klicken auch pausieren. Um die Wiedergabegeschwindigkeit anzupassen, kannst du die Geschwindigkeit in BPM einstellen. 
+            </p>
+            <p>
+                <ul>
+                    <li>5. Noten in MusicXML Format downloaden (Download MusicXML)</li>
+                </ul>
+            </p>
+            <p>
+                Um die generierten Noten in deinem Notenschreibprogramm weiterverwenden zu können, kannst du die Noten über den Button "Download MusicXML" herunterladen.
+            </p>
+            
+        </div>
+    </div>
+
+    <div class="container is-fluid" style="margin-top: 2rem;">
+        <div class="columns">
+           <div class="column">
+                <div class="box" style="height: 100%;">
+                    <h3 class="title is-3">K-Means - Clustering</h3>
+                    <p>
+                        Der K-Means Algorithmus klassifiziert die Datenmenge in eine vorgegebene Anzahl an Clustern (k). Anschließend werden die Datenpunkte dem nächstliegenden Cluster zugeordnet. In folgender Grafik wird deutlich wie sich dabei die Cluster verschieben, bis zum Schluss in "step 12" alle Datenpunkte dem richtigen Cluster zugeordnet sind.
+                    </p>
+                    <p>
+                        <br>
+                        In Note-Writer kann die <b>Anzahl an Clustern "k"</b> in das Eingabefeld bestimmt werden.
+                    </p>
+                    <img src="./style/clustering-algorithms/k-means.gif" alt="K-Means Grafik">
+                </div>
+            </div>
+            <div class="column">
+                <div class="box" style="height: 100%;">
+                    <h3 class="title is-3">DBSCAN - Clustering</h3>
+                    <p>
+                        Beim DBSCAN-Clustering werden sich naheliegende Punkte miteinander verbunden. Der Wert "e" (epsilon) gibt dabei an welche maximale Distanz zweier Punkte noch als ein Cluster angesehen werden. Sollte ein Abstand von zwei Punkten unter dem Wert "e" (epsilon) liegen gehören sie zu einem Cluster. Liegt der Wert drüber handelt es sich um einen neuen Cluster. Dieses Verfahren wird in folgender Animation verdeutlicht.
+                    </p>
+                    <p>
+                        <br>
+                        In Note-Writer kann der <b>maximale Abstand "e" (in ms)</b> durch das Eingabefeld bestimmt werden.
+                    </p>
+                    <br>
+                    <img src="./style/clustering-algorithms/dbscan.gif" alt="DBSCAN Grafik">
+                </div>
+            </div>  
+        </div>
+    </div>
+
+
+    <div class="container is-fluid" id="cluster-map" style="margin-top: 2rem;">
+        <div class="box">
+            <h3 class="title is-3">Impressum</h3>
+            <br><b>Bildnachweis</b>
+            <p>
+                Bild K-Means &copy; Georg Seif 2018 (Link: <a href="https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68">https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68</a>)<br>
+                Bild DBSCAN &copy; Georg Seif 2018 (Link: <a href="https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68">https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68</a>)
+                
+            </p>
+            <br><b>Impressum</b>
+            <p>
+                <a href="https://dumbergerl.de/#imprint" target="new">https://dumbergerl.de/#imprint</a>
+            </p>    
+        </div>
+    </div>
+</body>
+</html>

@@ -82,7 +82,7 @@ class PianoRole{
             let width = note.durationTimestamp * scale;
 
             $('.key.key-'+ pianoRoleId +'.octave-'+note.octave+' + .notes').first().append(`
-                <div class="note" style="background-color: `+note.color+`; margin-left: `+offsetLeft+`px; margin-top: -`+offsetTop+`px; width: `+ width +`px;">`+ note.durationTimestamp +`</div>
+                <div class="note" style="background-color: `+note.color+`; margin-left: `+offsetLeft+`px; margin-top: -`+offsetTop+`px; width: `+ width +`px;">`+ note.durationTimestamp +` ms</div>
             `);
 
             insertedNotesPOW.push(NotePow);
