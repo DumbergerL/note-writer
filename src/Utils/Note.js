@@ -7,6 +7,7 @@ class Note extends MusicXMLParser{
         this._octave = null;
         this._alter = null;
         this._duration = null;
+        this._stemUp = false;
 
         this._timestampStart = null;
         this._timestampEnd = null;
@@ -23,6 +24,7 @@ class Note extends MusicXMLParser{
         })[0];
         return theDurationType ? theDurationType.type : null;
     }
+    get stemUp(){ return this._stemUp; }
     
     get durationTimestamp(){ return parseInt(this.timestampEnd - this.timestampStart); }
     get timestampStart(){ return (this._timestampStart); }
@@ -36,20 +38,36 @@ class Note extends MusicXMLParser{
         let noteColor = '#FF6EFF';
         switch (this.duration) {
             case 6:
-                noteColor = '#FF8A24';
+                noteColor = '#00B326';
+                break;
+            case 9: //STEM
+                noteColor = '#00B373';
                 break;
             case 12:
-                noteColor = '#C430FF';
+                noteColor = '#8A40FF';
+                break;
+            case 18: //STEM
+                noteColor = '#D836FF';
                 break;
             case 24:
-                noteColor = '#E82320';
+                noteColor = '#26FF55';
                 break;
+            case 36: //STEM
+                noteColor = '#26FFB1';
+                break;                    
             case 48:
-                noteColor = '#203AE8';
+                noteColor = '#FF920D';
+                break;
+            case 72://STEM
+                noteColor = '#FFB90D';
                 break;
             case 96:
-                noteColor = '#0DF3FF';
+                noteColor = '#B36A12';
                 break;
+            case 144: //STEM
+                noteColor = '#B38412';
+                break;
+                        
         }
         return noteColor;
     }
@@ -81,8 +99,16 @@ class Note extends MusicXMLParser{
     }
     setDuration(duration){
         if(!Number.isInteger(duration) || duration < 0)throw "Invalid duration ("+duration+") given in!";
+        Note.TYPES.forEach(type => {
+            if(type.duration === duration){
+                this.setStemUp( type.stemUp );
+            }
+        });
         this._duration = duration;
         return this;
+    }
+    setStemUp( stemValue = true){
+        this._stemUp = stemValue;
     }
 
     setTimestampStart(timestamp){  this._timestampStart = timestamp; return this; }
@@ -118,6 +144,10 @@ class Note extends MusicXMLParser{
 
         if(this.type !== null){
             toneJSON.note.type = { _text: this.type };
+        }
+
+        if(this.stemUp === true){
+            toneJSON.note.stem = { _text: 'up'};
         }
 
         return toneJSON;
@@ -165,12 +195,22 @@ class Note extends MusicXMLParser{
 
 Note.VALID_STEPS = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 Note.TYPES = [ 
-    { duration: 96, type: 'whole'},
-    { duration: 48, type: 'half'},
-    { duration: 24, type: 'quarter'},
-    { duration: 12, type: 'eighth'},
-    { duration: 6, type: '16th'},
-    { duration: 3, type: '32nd'},    
+    { duration: 144, type: 'whole', stemUp: true},
+    { duration: 96, type: 'whole', stemUp: false},
+    
+    { duration: 72, type: 'half', stemUp: true},
+    { duration: 48, type: 'half', stemUp: false},
+
+    { duration: 36, type: 'quarter', stemUp: true},
+    { duration: 24, type: 'quarter', stemUp: false},
+    
+    { duration: 18, type: 'eighth', stemUp: true},
+    { duration: 12, type: 'eighth', stemUp: false},
+    
+    { duration: 9, type: '16th', stemUp: true},
+    { duration: 6, type: '16th', stemUp: false},
+
+    { duration: 3, type: '32nd', stemUp: false},    
 ];
 
 module.exports = Note;
