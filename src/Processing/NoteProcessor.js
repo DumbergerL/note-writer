@@ -17,11 +17,20 @@ class NoteProcessor{
         this._k = 2;
         this._e = 200;
 
-        //this._classificationTimes = [6,12,24,48,96];
-        this._classificationTimes = [6,9,12,18,24,36,48,72,96];
+        this._classificationTimes = [6,12,24,48,96];
+        //this._classificationTimes = [6,9,12,18,24,36,48,72,96];
         
         this._composition.addPart( this._part );
     }
+
+    addStemNotes( addStemNotes = true)
+    {
+        if(addStemNotes === true){
+            this._classificationTimes = [6,9,12,18,24,36,48,72,96];
+        }else{
+            this._classificationTimes = [6,12,24,48,96];
+        }
+    }    
 
     initComposition(){
         this._composition = new Composition().setTitle("Note-Writer");

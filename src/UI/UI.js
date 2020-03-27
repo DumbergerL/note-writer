@@ -83,6 +83,12 @@ $(function(){
         importJSON( $('#preset-json-'+presetId).val() );
     });
 
+    $('#checkbox-use-stem').change( (e) => {
+        let useStems = $(e.target).is(':checked');
+        PROCESSOR.addStemNotes( useStems );
+    });
+
+
 
     $('#button-record').click( () => {
         $('#button-record').toggleClass('is-danger');

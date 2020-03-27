@@ -20,7 +20,7 @@
     <article class="message is-primary" id="modal-import-export" style="display: none; position: absolute; z-index: 500; width: 600px; left: calc(50vw - 300px); top: 100px;">
         
         <div class="message-header">
-          <p>Import / Export</p>
+          <p>Settings</p>
           <button class="delete" aria-label="delete" id="modal-import-export-dismiss"></button>
         </div>
         <div class="message-body">
@@ -78,7 +78,22 @@
                
                 <button presetId="8" class="preset-button button is-small">O Haupt voll Blut und Wunden (einstimmig)</button>
                 <input id="preset-json-8" type="hidden" value='[{"step":"C","octave":4,"alter":1,"duration":12,"timestampStart":0,"timestampEnd":447.0049999654293,"velocity":0.5433070866141733,"durationTimestamp":447,"isRest":false,"type":"eighth"},{"step":"F","octave":4,"alter":1,"duration":12,"timestampStart":432.00499995145947,"timestampEnd":1274.0049998974428,"velocity":0.5354330708661418,"durationTimestamp":841,"isRest":false,"type":"eighth"},{"step":"E","octave":4,"alter":null,"duration":12,"timestampStart":1272.0049999188632,"timestampEnd":1766.0049999831244,"velocity":0.5905511811023622,"durationTimestamp":494,"isRest":false,"type":"eighth"},{"step":"D","octave":4,"alter":null,"duration":12,"timestampStart":1724.004999967292,"timestampEnd":2566.9999999227,"velocity":0.6062992125984252,"durationTimestamp":842,"isRest":false,"type":"eighth"},{"step":"C","octave":4,"alter":1,"duration":12,"timestampStart":2554.0049999253824,"timestampEnd":2971.004999941215,"velocity":0.5590551181102362,"durationTimestamp":417,"isRest":false,"type":"eighth"},{"step":"B","octave":3,"alter":null,"duration":48,"timestampStart":2961.0049999319017,"timestampEnd":4246.999999973923,"velocity":0.5433070866141733,"durationTimestamp":1285,"isRest":false,"type":"half"},{"step":"C","octave":4,"alter":1,"duration":48,"timestampStart":4201.999999932013,"timestampEnd":5083.004999905825,"velocity":0.5669291338582677,"durationTimestamp":881,"isRest":false,"type":"half"},{"step":"G","octave":4,"alter":1,"duration":12,"timestampStart":5057.999999960884,"timestampEnd":5426.004999899305,"velocity":0.5905511811023622,"durationTimestamp":368,"isRest":false,"type":"eighth"},{"step":"A","octave":4,"alter":null,"duration":12,"timestampStart":5453.999999910593,"timestampEnd":6193.00500000827,"velocity":0.5748031496062992,"durationTimestamp":739,"isRest":false,"type":"eighth"},{"step":"A","octave":4,"alter":null,"duration":12,"timestampStart":6295.999999972992,"timestampEnd":6752.004999900237,"velocity":0.4881889763779528,"durationTimestamp":456,"isRest":false,"type":"eighth"},{"step":"G","octave":4,"alter":1,"duration":12,"timestampStart":6724.004999967292,"timestampEnd":7502.004999900237,"velocity":0.5984251968503937,"durationTimestamp":777,"isRest":false,"type":"eighth"},{"step":"G","octave":4,"alter":1,"duration":12,"timestampStart":7593.004999915138,"timestampEnd":8020.004999940284,"velocity":0.5354330708661418,"durationTimestamp":427,"isRest":false,"type":"eighth"},{"step":"F","octave":4,"alter":1,"duration":48,"timestampStart":8031.004999997094,"timestampEnd":9362.999999895692,"velocity":0.5196850393700787,"durationTimestamp":1331,"isRest":false,"type":"half"}]'>
-            </div>            
+            </div> 
+            
+            
+            <h5 class="subtitle is-5" style="margin-top: 3rem;">Stem-Option (Punktierung)</h5>
+            <div class="field">
+                <p class="control">
+                    <label class="checkbox">
+                        <input type="checkbox" value="use-stems" id="checkbox-use-stem">
+                        use stems?
+                      </label>
+                </p>
+            </div>
+            <ul>
+                <li>Quarter without stem: <img src="./style/notes-images/24.PNG" style="height: 2rem;"></li>
+                <li>Quarter with stem: <img src="./style/notes-images/36.PNG" style="height: 2rem;"></li>
+            </ul>
         </div>
     </article>
         
@@ -100,9 +115,9 @@
                 <div class="field is-grouped">
                     <p class="control">
                         <a id="button-import-export" class="button ">
-                        <span>Import/Export</span>
+                        <span>Settings</span>
                         <span class="icon is-small">
-                            <i class="fas fa-upload"></i>
+                            <i class="fas fa-cogs"></i>
                         </span>
                         </a>
                     </p>
