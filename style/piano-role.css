@@ -1,0 +1,62 @@
+:root {
+  --note-height: 20px;
+  --key-width: 80px;
+}
+
+.piano-role {
+  background-color: #4B4B4B;
+  border-radius: 4px;
+}
+.piano-role .workbench {
+  padding: 30px 20px;
+}
+.piano-role .workbench .piano .swimlane {
+  height: var(--note-height);
+  display: flex;
+  border-top: 0.2px solid #363535;
+}
+.piano-role .workbench .piano .swimlane .key {
+  width: var(--key-width);
+  position: relative;
+  background-color: white;
+  border: 0.5px solid black;
+  z-index: 10;
+}
+.piano-role .workbench .piano .swimlane .key-cS, .piano-role .workbench .piano .swimlane .key-dS, .piano-role .workbench .piano .swimlane .key-fS, .piano-role .workbench .piano .swimlane .key-gS, .piano-role .workbench .piano .swimlane .key-aS {
+  background-color: black;
+  height: var(--note-height);
+  width: calc( var(--key-width) * 0.6);
+  margin-right: calc( var(--key-width) * 0.4);
+}
+.piano-role .workbench .piano .swimlane .key-c, .piano-role .workbench .piano .swimlane .key-f {
+  margin-top: calc( var(--note-height) / -2);
+  height: calc( var(--note-height) * 1.5 );
+  z-index: 5;
+}
+.piano-role .workbench .piano .swimlane .key-b, .piano-role .workbench .piano .swimlane .key-e {
+  margin-bottom: calc( var(--note-height) / -2);
+  height: calc( var(--note-height) * 1.5 );
+  z-index: 5;
+}
+.piano-role .workbench .piano .swimlane .key-a, .piano-role .workbench .piano .swimlane .key-g, .piano-role .workbench .piano .swimlane .key-d {
+  margin-bottom: calc( var(--note-height) / -2);
+  margin-top: calc( var(--note-height) / -2);
+  height: calc( var(--note-height) * 2);
+  z-index: 5;
+}
+.piano-role .workbench .piano .swimlane .notes {
+  height: 100%;
+  width: 100%;
+}
+.piano-role .workbench .piano .swimlane .notes .note {
+  height: 100%;
+  background-color: #FF6EFF;
+  border-radius: 20px;
+  width: 50px;
+  text-align: center;
+  font-weight: bold;
+  line-height: 20px;
+  color: white;
+}
+
+/*# sourceMappingURL=piano-role.css.map */

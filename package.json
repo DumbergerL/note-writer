@@ -1,0 +1,29 @@
+{
+  "name": "note-writer",
+  "version": "1.1.0",
+  "description": "",
+  "scripts": {
+    "build": "webpack",
+    "build-watch": "webpack --watch",
+    "dev-start": "webpack-dev-server --open",
+    "test": "jest",
+    "test-coverage": "jest --coverage",
+    "test-clear-cache": "jest --clearCache",
+    "serve": "php -S localhost:8000"
+  },
+  "author": "Lukas Dumberger",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "jquery": "^3.4.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "dependencies": {
+    "opensheetmusicdisplay": "^0.7.1",
+    "tone": "^13.8.25",
+    "webmidi": "^2.5.1",
+    "xml-js": "^1.6.11"
+  }
+}
