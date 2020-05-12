@@ -13,15 +13,16 @@
   },
   "author": "Lukas Dumberger",
   "license": "MIT",
+  "repository": "https://github.com/DumbergerL/note-writer",
   "devDependencies": {
     "jest": "^24.9.0",
-    "jquery": "^3.4.1",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9",
-    "webpack-dev-server": "^3.9.0"
+    "jquery": "^3.5.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "opensheetmusicdisplay": "^0.7.1",
+    "opensheetmusicdisplay": "^0.7.6",
     "tone": "^13.8.25",
     "webmidi": "^2.5.1",
     "xml-js": "^1.6.11"
