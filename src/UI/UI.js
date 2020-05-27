@@ -138,6 +138,13 @@ $(function(){
         window.PIANO_ROLE.visualizeNotes( window.PROCESSOR.notes );
     });
 
+    $('#process-bpm').click( () => {
+        window.PROCESSOR.processNoteDurationBPMClassification();
+        visualizeClusterMap(PROCESSOR._map);
+        window.PIANO_ROLE.visualizeNotes( window.PROCESSOR.notes );
+    });
+
+
     function visualizeClusterMap( clusterMap ){
         $('#cluster-map').show();
         $('#cluster-map-table-body').empty();

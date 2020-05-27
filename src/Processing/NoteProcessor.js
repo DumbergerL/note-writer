@@ -3,6 +3,7 @@ const OSMD = require('../OSMD/index');
 const {Composition, Part, Measure} = require('../MusicXML/Composition');
 const DBSCAN = require('./Clustering/dbscan');
 const KMeans = require('./Clustering/k-means');
+const BPMProcessing = require('./Clustering/BPMProcessing');
 const Note = require('../Utils/Note');
 
 class NoteProcessor{
@@ -82,6 +83,8 @@ class NoteProcessor{
     
         this.classifyClusterMap();
 
+        console.log(this._map);
+
         this._notes.sort( (a,b) => {
             return (a.timestampStart - b.timestampStart);
         }).forEach( note => {
@@ -90,24 +93,6 @@ class NoteProcessor{
             note.setDuration( duration);
         });
 
-        /*for(let i = 0; i < (this._notes.length-1); i++){
-            console.log("NOTE "+i);
-            let note1 = this._notes[i];
-            let note2 = this._notes[i+1];
-
-            let restTime = note2.timestampStart - note1.timestampEnd;
-            try{
-                let restNote = new Note()
-                    .setTimestampStart( note1.timestampEnd + 1)
-                    .setTimestampEnd( note2.timestampStart - 1 );
-                let clusterId = dbscan4.getClusterIdOfRecord( restNote );
-                let duration = map.filter( el => el.cluster_id === clusterId)[0].duration;
-                
-                restNote.setDuration( duration ); 
-                
-                this._notes.splice( i+1, 0, restNote);
-            }catch(e){} //not clusterable
-        }*/
 
         this._notes.forEach( note => this._part.addNote( note ));        
         OSMD.renderMusicXML( this._composition.toMusicXML() );
@@ -129,29 +114,23 @@ class NoteProcessor{
             note.setDuration( duration);
         });
 
-        /*for(let i = 0; i < (this._notes.length-1); i++){
-            console.log("NOTE "+i);
-            let note1 = this._notes[i];
-            let note2 = this._notes[i+1];
-
-            let restTime = note2.timestampStart - note1.timestampEnd;
-            try{
-                let restNote = new Note()
-                    .setTimestampStart( note1.timestampEnd + 1)
-                    .setTimestampEnd( note2.timestampStart - 1 );
-                let clusterId = dbscan4.getClusterIdOfRecord( restNote );
-                let duration = map.filter( el => el.cluster_id === clusterId)[0].duration;
-                
-                restNote.setDuration( duration ); 
-                
-                this._notes.splice( i+1, 0, restNote);
-            }catch(e){} //not clusterable
-        }*/
-
         this._notes.forEach( note => this._part.addNote( note ));        
         OSMD.renderMusicXML( this._composition.toMusicXML() );
     }
 
+    processNoteDurationBPMClassification(){
+        this.initComposition();
+        let clusteringAlgorithm = new BPMProcessing().setDataset( this._notes ).generateCluster();
+
+        this._map = clusteringAlgorithm.getClusterCentroidMap();
+
+        this._map.forEach( map => {
+            map.duration = map.cluster.elements[0].duration;
+        });
+
+        this._notes.forEach( note => this._part.addNote( note ));        
+        OSMD.renderMusicXML( this._composition.toMusicXML() );
+    }
 
     downloadNotesheet(){
         this._composition.download();
