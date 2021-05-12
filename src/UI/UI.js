@@ -183,5 +183,8 @@ $(function(){
     $('#button-download').click( () => {
         PROCESSOR._composition.download('My Symphonie');
     });
+
+    $('#jingle-bells-preset-button').click();
+
 });
 
