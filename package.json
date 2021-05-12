@@ -15,14 +15,15 @@
   "license": "MIT",
   "repository": "https://github.com/DumbergerL/note-writer",
   "devDependencies": {
-    "jest": "^24.9.0",
+    "jest": "^26.6.3",
     "jquery": "^3.5.1",
-    "webpack": "^4.43.0",
+    "webpack": "^5.37.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "opensheetmusicdisplay": "^0.7.6",
+    "opensheetmusicdisplay": "^1.0.0",
+    "stream-browserify": "^3.0.0",
     "tone": "^13.8.25",
     "webmidi": "^2.5.1",
     "xml-js": "^1.6.11"

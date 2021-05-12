@@ -6,6 +6,12 @@ module.exports = {
       "piano-role": './src/UI/PianoRole/index.js',
       'ui': './src/UI/UI.js',
     },
+    resolve: {
+        fallback: {
+            "stream": require.resolve("stream-browserify"),
+            "buffer": false
+        }
+    },
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: '[name].js'
