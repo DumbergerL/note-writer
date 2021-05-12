@@ -16,6 +16,8 @@ class NoteStream{
             this._midiController.onNoteOff( (event) => {
                 this._offNote(event);
             });
+        }).catch(reason => {
+            // ignore reason
         });
 
 

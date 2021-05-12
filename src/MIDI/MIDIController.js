@@ -8,7 +8,7 @@ class MIDIController{
             MIDIController.WebMidi = WebMidi;
             MIDIController.WebMidi.enable( function(err){
                 if(err){
-                    reject('WebMidi could not be enabled.', err);
+                    reject('WebMidi could not be enabled.'+err.message);
                 }else{
                     resolve();
                 }
@@ -35,7 +35,9 @@ class MIDIController{
         return new Promise( (resolve, reject ) => {
             staticWebMidi.then( () => {
 
-                if(MIDIController.WebMidi.inputs.length <= 0)throw "No MIDI Device detected!";
+                if(MIDIController.WebMidi.inputs.length <= 0){
+                    reject("No MIDI Device detected!");
+                }
 
                 if(this.controllerName){
                     this.output = MIDIController.WebMidi.getOutputByName(this.controllerName);
@@ -51,6 +53,8 @@ class MIDIController{
 
                 this.isInitialized = true;
                 resolve(this);
+            }).catch(reason => {
+                reject(reason);
             });
         });
     }
