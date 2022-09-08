@@ -22,7 +22,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "opensheetmusicdisplay": "^1.0.0",
+    "opensheetmusicdisplay": "^1.5.3",
     "stream-browserify": "^3.0.0",
     "tone": "^13.8.25",
     "webmidi": "^2.5.1",
